@@ -1,14 +1,6 @@
-# Manuel Moreno — Network & Infrastructure CV
+# Network & Infrastructure CV
 
 CV personal estático en HTML/CSS/JS puro.
-Listo para desplegar en **GitHub Pages**.
-
-## Despliegue
-
-1. Crea un repo nuevo en GitHub llamado `Mnu-Hdez.github.io` (o cualquier otro).
-2. Sube los 3 archivos a la raíz: `index.html`, `styles.css`, `script.js`.
-3. En el repo: **Settings → Pages → Branch: `main` / `root` → Save**.
-4. La web estará en `https://mnu-hdez.github.io/`.
 
 ## Estructura
 
@@ -16,7 +8,7 @@ Listo para desplegar en **GitHub Pages**.
 - `styles.css` — design system (paleta navy/cyan, fuentes JetBrains Mono + Space Grotesk)
 - `script.js` — repos de GitHub vía API pública, ping live, uptime, nav móvil
 
-## Toques de "infra de redes"
+## Toques particulares de "infra de redes"
 
 - Topología SVG animada (paquetes viajando por las líneas)
 - Terminal con `ping` y `uptime` en vivo
