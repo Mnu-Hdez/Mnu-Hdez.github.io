@@ -87,7 +87,7 @@ body::before {
 .nav-links a {
   font-family: var(--mono);
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-soft);
   text-decoration: none;
   letter-spacing: .05em;
   transition: color .2s;
@@ -353,7 +353,7 @@ h1 {
 .date {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--muted);
+  color: var(--text-soft);
   white-space: nowrap;
   padding: 3px 10px;
   border: 1px solid var(--border);
@@ -471,7 +471,7 @@ h1 {
   margin-top: 1rem;
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--muted);
+  color: var(--text-soft);
 }
 .netmap-legend .dot {
   display: inline-block; width: 8px; height: 8px;
