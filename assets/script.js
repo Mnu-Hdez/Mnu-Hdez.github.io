@@ -47,9 +47,22 @@
   updUp();
   setInterval(updUp, 60000);
 
+  // === Language switch — persist preference ===
+  document.querySelectorAll('.lang-switch a[data-lang]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('lang', a.getAttribute('data-lang')); } catch (e) {}
+    });
+  });
+
   // === GitHub repos ===
   const grid = document.getElementById('repos-grid');
   if (!grid) return;
+
+  const i18n = {
+    loading: grid.getAttribute('data-loading') || 'Loading…',
+    empty:   grid.getAttribute('data-empty')   || 'No public repositories yet.',
+    error:   grid.getAttribute('data-error')   || 'Could not load repos',
+  };
 
   const langColors = {
     Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6',
@@ -66,7 +79,7 @@
         .slice(0, 6);
 
       if (!repos.length) {
-        grid.innerHTML = '<p class="repos-loading">No hay repositorios públicos todavía.</p>';
+        grid.innerHTML = `<p class="repos-loading">${i18n.empty}</p>`;
         return;
       }
 
@@ -87,7 +100,7 @@
       }).join('');
     })
     .catch(err => {
-      grid.innerHTML = `<p class="repos-loading">No se pudieron cargar los repos (${escapeHtml(err.message)}).</p>`;
+      grid.innerHTML = `<p class="repos-loading">${i18n.error} (${escapeHtml(err.message)}).</p>`;
     });
 
   function escapeHtml(s) {

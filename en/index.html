@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manuel Moreno — Network & Infrastructure Engineer</title>
+<meta name="description" content="Interactive CV of Manuel Moreno Hernández — Computer Engineering student specialized in network infrastructure, VPN, security and self-hosting." />
+<meta name="author" content="Manuel Moreno Hernández" />
+<meta property="og:title" content="Manuel Moreno — Network & Infrastructure" />
+<meta property="og:description" content="Interactive CV focused on network infrastructure, homelab and open-source solutions." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="es_ES" />
+
+<link rel="alternate" href="https://mnu-hdez.github.io/es/" hreflang="es" />
+<link rel="alternate" href="https://mnu-hdez.github.io/en/" hreflang="en" />
+<link rel="alternate" href="https://mnu-hdez.github.io/" hreflang="x-default" />
+<link rel="canonical" href="https://mnu-hdez.github.io/en/" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/styles.css" />
+<script>try{localStorage.setItem('lang','en')}catch(e){}</script>
+</head>
+<body>
+
+<svg class="bg-net" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="nl" x1="0" x2="1">
+      <stop offset="0" stop-color="var(--accent-cyan)" stop-opacity="0"/>
+      <stop offset=".5" stop-color="var(--accent-cyan)" stop-opacity=".5"/>
+      <stop offset="1" stop-color="var(--accent-cyan)" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#nl)" stroke-width="1" fill="none">
+    <path d="M0,120 C300,80 600,200 1200,140" />
+    <path d="M0,300 C400,250 800,360 1200,280" />
+    <path d="M0,500 C300,470 700,560 1200,490" />
+    <path d="M0,700 C500,640 800,720 1200,660" />
+  </g>
+</svg>
+
+<nav class="nav">
+  <a class="nav-brand" href="#hero">$ mmh --profile</a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#network">network</a></li>
+    <li><a href="#github">github</a></li>
+    <li><a href="#contact">contact</a></li>
+    <li class="lang-switch">
+      <a href="/en/" hreflang="en" aria-current="true" data-lang="en" class="active">EN</a>
+      <span class="lang-sep">/</span>
+      <a href="/es/" hreflang="es" aria-label="Cambiar a español" data-lang="es">ES</a>
+    </li>
+  </ul>
+</nav>
+
+<section id="hero" class="hero">
+  <div class="hero-grid">
+    <div class="hero-main">
+      <span class="status-badge">
+        <span class="status-dot"></span>
+        Open to new opportunities
+      </span>
+
+      <p class="eyebrow"><span class="eyebrow-line"></span>Network &amp; Infrastructure Engineer</p>
+
+      <h1>
+        Manuel<br />
+        <span class="accent">Moreno Hernández</span>
+      </h1>
+
+      <p class="hero-role">// Computer Engineering · UPM · Madrid</p>
+
+      <p class="hero-desc">
+        Computer Engineering student specialized in network infrastructure, perimeter
+        security and open-source solutions. Currently interning at an international
+        metallurgy company (road and civil structures), applying networking solutions
+        in industrial environments.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/Mnu-Hdez" target="_blank" rel="noreferrer">▸ GitHub</a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noreferrer">in&nbsp; LinkedIn</a>
+        <a class="btn btn-ghost" href="#contact">✉ Contact</a>
+      </div>
+
+      <ul class="proto-row" aria-label="Protocols">
+        <li>TCP/IP</li><li>BGP</li><li>OSPF</li><li>WireGuard</li><li>DNS</li><li>VLAN</li>
+      </ul>
+    </div>
+
+    <aside class="terminal" aria-label="Demo terminal">
+      <div class="term-bar">
+        <span class="term-dot r"></span>
+        <span class="term-dot y"></span>
+        <span class="term-dot g"></span>
+        <span class="term-title">manu@homelab:~</span>
+      </div>
+      <div class="term-body">
+        <p><span class="prompt">$</span> whoami</p>
+        <p class="out">manuel.moreno — network engineer</p>
+        <p><span class="prompt">$</span> ping homelab.local</p>
+        <p class="out">PING homelab.local (10.0.0.1): 56 data bytes</p>
+        <p class="out">64 bytes from 10.0.0.1: icmp_seq=0 ttl=64 time=<span class="ping-ms">0.42</span> ms</p>
+        <p class="out">64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=<span class="ping-ms">0.39</span> ms</p>
+        <p class="out">64 bytes from 10.0.0.1: icmp_seq=2 ttl=64 time=<span class="ping-ms">0.51</span> ms</p>
+        <p><span class="prompt">$</span> uptime</p>
+        <p class="out"><span id="uptime">loading…</span></p>
+        <p><span class="prompt">$</span> <span class="cursor">_</span></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <header class="section-header" id="experience">
+    <h2>// Experience</h2><div class="section-line"></div>
+  </header>
+
+  <article class="panel">
+    <div class="panel-head">
+      <div>
+        <h3>Internship — IT Infrastructure</h3>
+        <p class="panel-sub">International company · Metallurgy & road/civil structures</p>
+      </div>
+      <span class="date">2024 — present</span>
+    </div>
+    <ul class="bullets">
+      <li>Support and maintenance of network infrastructure in an international industrial environment.</li>
+      <li>Deployment of connectivity and security solutions on a metallurgical production plant.</li>
+      <li>Coordination with multidisciplinary teams on civil infrastructure projects.</li>
+    </ul>
+  </article>
+
+  <article class="panel">
+    <div class="panel-head">
+      <div>
+        <h3>Piscina 42 Madrid</h3>
+        <p class="panel-sub">Telefónica study program · 42 Madrid</p>
+      </div>
+      <span class="date">2023</span>
+    </div>
+    <ul class="bullets">
+      <li>Intensive C programming and problem-solving training in a peer-to-peer environment.</li>
+      <li>Collaborative projects under self-directed learning methodology.</li>
+    </ul>
+  </article>
+
+  <article class="panel">
+    <div class="panel-head">
+      <div>
+        <h3>Homelab — Home Infrastructure</h3>
+        <p class="panel-sub">Personal project · TrueNAS + Networking</p>
+      </div>
+      <span class="date">2022 — present</span>
+    </div>
+    <ul class="bullets">
+      <li>Deployment and administration of a NAS server with TrueNAS for storage and services.</li>
+      <li>VPN configuration (WireGuard / Tailscale) for secure remote access.</li>
+      <li>Network-level DNS filtering and ad blocking with AdGuard Home.</li>
+      <li>Router management and advanced configuration of LANs and VLANs.</li>
+      <li>Deployment of open-source self-hosted networking applications.</li>
+    </ul>
+  </article>
+
+  <header class="section-header" id="education">
+    <h2>// Education</h2><div class="section-line"></div>
+  </header>
+
+  <article class="panel">
+    <div class="panel-head">
+      <div>
+        <h3>BSc in Computer Engineering</h3>
+        <p class="panel-sub">Universidad Politécnica de Madrid</p>
+      </div>
+      <span class="date">2020 — ongoing</span>
+    </div>
+    <p>Specialization in networking, systems and computer architectures.</p>
+  </article>
+
+  <article class="panel">
+    <div class="panel-head">
+      <div>
+        <h3>Scientific Baccalaureate</h3>
+        <p class="panel-sub">I.E.S. Campiña Alta</p>
+      </div>
+      <span class="date">2018 — 2020</span>
+    </div>
+  </article>
+
+  <header class="section-header" id="skills">
+    <h2>// Tech stack</h2><div class="section-line"></div>
+  </header>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <p class="skill-cat">Networking</p>
+      <div class="tags"><span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag">VLANs</span><span class="tag">Routing</span><span class="tag">Firewalls</span><span class="tag">NAT</span></div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">VPN &amp; Tunneling</p>
+      <div class="tags"><span class="tag tag-blue">WireGuard</span><span class="tag tag-blue">Tailscale</span><span class="tag tag-blue">Site-to-Site</span><span class="tag tag-blue">SSH Tunnels</span></div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Security</p>
+      <div class="tags"><span class="tag tag-green">AdGuard Home</span><span class="tag tag-green">DNS Filtering</span><span class="tag tag-green">Hardening</span><span class="tag tag-green">Cybersecurity</span></div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Systems &amp; Servers</p>
+      <div class="tags"><span class="tag">TrueNAS</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Self-Hosting</span><span class="tag">Open-Source</span></div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Hardware &amp; Homelab</p>
+      <div class="tags"><span class="tag tag-blue">Routers</span><span class="tag tag-blue">Switches</span><span class="tag tag-blue">NAS</span><span class="tag tag-blue">Mini-PC</span><span class="tag tag-blue">Cabling</span></div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Languages</p>
+      <div class="tags"><span class="tag tag-green">Python</span><span class="tag tag-green">Bash</span><span class="tag tag-green">C</span><span class="tag tag-green">JavaScript</span></div>
+    </div>
+  </div>
+
+  <header class="section-header" id="network">
+    <h2>// Network Topology</h2><div class="section-line"></div>
+  </header>
+
+  <div class="netmap" role="img" aria-label="Homelab network topology diagram">
+    <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="nodeGlow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="var(--accent-cyan)" stop-opacity=".7"/>
+          <stop offset="1" stop-color="var(--accent-cyan)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g class="links">
+        <line class="link" x1="300" y1="60"  x2="300" y2="160" />
+        <line class="link" x1="300" y1="160" x2="120" y2="260" />
+        <line class="link" x1="300" y1="160" x2="300" y2="260" />
+        <line class="link" x1="300" y1="160" x2="480" y2="260" />
+      </g>
+      <circle class="packet p1" r="3" fill="var(--accent-cyan)"/>
+      <circle class="packet p2" r="3" fill="var(--accent-green)"/>
+      <circle class="packet p3" r="3" fill="var(--accent-blue)"/>
+      <g class="node">
+        <circle cx="300" cy="60" r="22" />
+        <circle cx="300" cy="60" r="40" fill="url(#nodeGlow)"/>
+        <text x="300" y="64">WAN</text>
+      </g>
+      <g class="node"><circle cx="300" cy="160" r="22" /><text x="300" y="164">Router</text></g>
+      <g class="node"><circle cx="120" cy="260" r="22" /><text x="120" y="264">NAS</text></g>
+      <g class="node"><circle cx="300" cy="260" r="22" /><text x="300" y="264">VPN</text></g>
+      <g class="node"><circle cx="480" cy="260" r="22" /><text x="480" y="264">DNS</text></g>
+    </svg>
+    <div class="netmap-legend">
+      <span><i class="dot dot-cyan"></i> LAN traffic</span>
+      <span><i class="dot dot-green"></i> WireGuard</span>
+      <span><i class="dot dot-blue"></i> AdGuard / DNS</span>
+    </div>
+  </div>
+
+  <header class="section-header" id="github">
+    <h2>// GitHub · Mnu-Hdez</h2><div class="section-line"></div>
+  </header>
+
+  <div id="repos-grid" class="repos" data-loading="Loading repositories…" data-empty="No public repositories yet." data-error="Could not load repos">
+    <p class="repos-loading">Loading repositories…</p>
+  </div>
+  <p class="repos-link"><a href="https://github.com/Mnu-Hdez" target="_blank" rel="noreferrer">See all repos →</a></p>
+
+  <header class="section-header" id="contact">
+    <h2>// Contact</h2><div class="section-line"></div>
+  </header>
+
+  <div class="contact-grid">
+    <a class="contact-item" href="mailto:manuehernandez@protonmail.com">
+      <span class="ci-icon">✉</span>
+      <span class="ci-body">
+        <span class="ci-label">Email</span>
+        <span class="ci-value">manuehernandez@protonmail.com</span>
+      </span>
+    </a>
+    <a class="contact-item" href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noreferrer">
+      <span class="ci-icon">in</span>
+      <span class="ci-body">
+        <span class="ci-label">LinkedIn</span>
+        <span class="ci-value">manu-hdez</span>
+      </span>
+    </a>
+    <a class="contact-item" href="https://github.com/Mnu-Hdez" target="_blank" rel="noreferrer">
+      <span class="ci-icon">GH</span>
+      <span class="ci-body">
+        <span class="ci-label">GitHub</span>
+        <span class="ci-value">Mnu-Hdez</span>
+      </span>
+    </a>
+    <div class="contact-item">
+      <span class="ci-icon">📍</span>
+      <span class="ci-body">
+        <span class="ci-label">Location</span>
+        <span class="ci-value">Guadalajara, Spain</span>
+      </span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Manuel Moreno Hernández · Network &amp; Infrastructure · <span id="year"></span> · Guadalajara, ES</p>
+  <p class="foot-mono">// uptime <span id="footUp">—</span> · status <span class="ok">OK</span></p>
+</footer>
+
+<script src="/assets/script.js" defer></script>
+</body>
+</html>
