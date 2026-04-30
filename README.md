@@ -1,47 +1,37 @@
-# Manuel Moreno — CV (multi-idioma)
+# Manuel Moreno — CV (i18n)
 
-CV estático para GitHub Pages con soporte de **español** e **inglés** mediante subdirectorios.
+Static multilingual CV for GitHub Pages.
 
-## Estructura
+## Structure
 
 ```
-.
-├── index.html        # Detecta el idioma del navegador y redirige a /es/ o /en/
-├── es/
-│   └── index.html    # Versión en español
-├── en/
-│   └── index.html    # Versión en inglés
-└── assets/
-    ├── styles.css    # Estilos compartidos
-    └── script.js     # Lógica compartida (GitHub API, ping, uptime, i18n)
+/index.html        # auto-redirect by browser language / localStorage
+/es/index.html     # Spanish
+/en/index.html     # English
+/fr/index.html     # French
+/jp/index.html     # Japanese
+/assets/styles.css
+/assets/script.js
 ```
 
-## Cómo funciona el idioma
+## Behavior
 
-1. Al entrar en `https://mnu-hdez.github.io/`, el `index.html` raíz:
-   - Lee `localStorage.lang` si el usuario ya eligió antes.
-   - Si no, mira `navigator.language`: si empieza por `es` → `/es/`, si no → `/en/`.
-   - Conserva el `#hash` durante la redirección.
-2. En cada página hay un selector **EN / ES** en la nav. Al hacer clic se guarda la preferencia.
-
-## Despliegue en GitHub Pages
-
-1. Sube todo el contenido a la raíz del repo `mnu-hdez.github.io` (rama `main`).
-2. En **Settings → Pages**, selecciona la rama `main` y carpeta `/ (root)`.
-3. Espera el deploy. URLs:
-   - `https://mnu-hdez.github.io/`     → redirección automática
-   - `https://mnu-hdez.github.io/es/`  → español
-   - `https://mnu-hdez.github.io/en/`  → inglés
+- Visiting `/` runs a JS redirect to `/es/`, `/en/`, `/fr/` or `/jp/`:
+  1. Saved preference in `localStorage.lang`
+  2. Browser language (`navigator.languages`): `es`→es, `en`→en, `fr`→fr, `ja`→jp
+  3. Fallback: `en`
+- The hash (e.g. `#contact`) is preserved across the redirect.
+- Each page has a language switcher (EN / ES / FR / 日本語) that stores the choice in `localStorage`.
+- `<noscript>` users get a plain choice page.
 
 ## SEO
 
-Cada idioma incluye etiquetas `hreflang` y `canonical`, además de `og:locale` para que Google y redes sociales entiendan las versiones disponibles.
+- `hreflang` alternates for `es`, `en`, `fr`, `ja` and `x-default`.
+- Canonical URL per language.
+- `og:locale` per language plus `og:locale:alternate` for the others.
 
-## Editar contenido
+## Deploy on GitHub Pages
 
-- Texto en español: `es/index.html`
-- Texto en inglés: `en/index.html`
-- Estilos / animaciones: `assets/styles.css`
-- Comportamiento (ping live, uptime, repos GitHub): `assets/script.js`
-
-Los textos del bloque de repos (cargando / vacío / error) se controlan desde `data-loading`, `data-empty`, `data-error` del `#repos-grid` en cada `index.html`.
+1. Push the repo (e.g. `mnu-hdez.github.io`) with these files at the root.
+2. Enable Pages → branch `main` → folder `/ (root)`.
+3. Open `https://mnu-hdez.github.io/` — it will redirect to your language.

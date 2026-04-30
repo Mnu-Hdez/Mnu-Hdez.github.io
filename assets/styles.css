@@ -612,6 +612,27 @@ footer {
   background: color-mix(in oklab, var(--accent-cyan) 12%, transparent);
 }
 .lang-sep { color: var(--border); }
+.lang-switch a[data-lang="jp"] {
+  font-family: "Noto Sans JP", var(--font-mono, "JetBrains Mono", monospace);
+  letter-spacing: .04em;
+}
 @media (max-width: 768px) {
-  .lang-switch { margin-left: 0; padding-left: 0; border-left: 0; padding-top: .75rem; }
+  .lang-switch { margin-left: 0; padding-left: 0; border-left: 0; padding-top: .75rem; flex-wrap: wrap; }
+}
+
+/* === Japanese page typography === */
+body.lang-jp,
+body.lang-jp .hero-desc,
+body.lang-jp .panel,
+body.lang-jp .bullets,
+body.lang-jp .skill-cat,
+body.lang-jp .ci-label,
+body.lang-jp .ci-value,
+body.lang-jp footer {
+  font-family: "Noto Sans JP", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+body.lang-jp .nav-links a,
+body.lang-jp .date,
+body.lang-jp .status-badge {
+  font-family: "Noto Sans JP", var(--font-mono, "JetBrains Mono", monospace);
 }

@@ -7,32 +7,50 @@
 <meta name="description" content="CV / Portfolio of Manuel Moreno Hernández — Network & Infrastructure Engineer." />
 <link rel="alternate" href="https://mnu-hdez.github.io/es/" hreflang="es" />
 <link rel="alternate" href="https://mnu-hdez.github.io/en/" hreflang="en" />
+<link rel="alternate" href="https://mnu-hdez.github.io/fr/" hreflang="fr" />
+<link rel="alternate" href="https://mnu-hdez.github.io/jp/" hreflang="ja" />
 <link rel="alternate" href="https://mnu-hdez.github.io/" hreflang="x-default" />
 <script>
   (function () {
-    try {
-      var stored = localStorage.getItem('lang');
-      var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      var lang = stored || (nav.indexOf('es') === 0 ? 'es' : 'en');
-      // Preserve hash (#section) when redirecting
-      var hash = window.location.hash || '';
-      window.location.replace('/' + lang + '/' + hash);
-    } catch (e) {
-      window.location.replace('/en/');
+    var SUPPORTED = ['es', 'en', 'fr', 'jp'];
+    // Map browser language prefix -> our directory code
+    var MAP = { es: 'es', en: 'en', fr: 'fr', ja: 'jp' };
+    function pick() {
+      try {
+        var stored = localStorage.getItem('lang');
+        if (stored && SUPPORTED.indexOf(stored) !== -1) return stored;
+      } catch (e) {}
+      var langs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || 'en'];
+      for (var i = 0; i < langs.length; i++) {
+        var prefix = (langs[i] || '').toLowerCase().split('-')[0];
+        if (MAP[prefix]) return MAP[prefix];
+      }
+      return 'en';
     }
+    var lang = pick();
+    var hash = window.location.hash || '';
+    window.location.replace('/' + lang + '/' + hash);
   })();
 </script>
 <style>
   body{margin:0;background:#0b1020;color:#cfd6e6;font-family:ui-sans-serif,system-ui,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:2rem}
-  a{color:#5cc8ff;margin:0 .5rem;text-decoration:none;border:1px solid #2a3656;padding:.5rem 1rem;border-radius:6px}
+  a{color:#5cc8ff;margin:.25rem .35rem;text-decoration:none;border:1px solid #2a3656;padding:.5rem 1rem;border-radius:6px;display:inline-block}
   a:hover{border-color:#5cc8ff}
+  p{margin:.5rem 0}
 </style>
 </head>
 <body>
 <noscript>
   <div>
-    <p>Choose your language / Elige tu idioma:</p>
-    <p><a href="/en/">English</a><a href="/es/">Español</a></p>
+    <p>Choose your language / Elige tu idioma / Choisissez votre langue / 言語を選択:</p>
+    <p>
+      <a href="/en/">English</a>
+      <a href="/es/">Español</a>
+      <a href="/fr/">Français</a>
+      <a href="/jp/">日本語</a>
+    </p>
   </div>
 </noscript>
 </body>
