@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manuel Moreno — Network & Infrastructure Engineer</title>
-<meta name="description" content="Network & Infrastructure Engineer. Computer Engineering (UPM). Homelab, VPN, Security, Open-source.">
+<meta name="description" content="Network & Infrastructure Engineer · Computer Engineering (UPM) · Homelab · VPN · Security · Open-source">
 <meta property="og:title" content="Manuel Moreno — Network & Infrastructure">
 <meta property="og:description" content="Computer Engineer specialized in network infrastructure, VPN, security and self-hosting.">
 <meta property="og:type" content="website">
@@ -14,21 +14,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #050505;
+  /* === TECHNICAL MODE (DEFAULT - DARK) === */
+  --bg: #040404;
   --bg-elevated: #0a0a0a;
   --bg-card: #0d0d0d;
   --fg: #fafafa;
   --fg-muted: #888888;
-  --fg-subtle: #525252;
+  --fg-subtle: #444444;
   --accent: #00d4aa;
-  --accent-dim: rgba(0, 212, 170, 0.12);
+  --accent-dim: rgba(0, 212, 170, 0.1);
   --accent-glow: rgba(0, 212, 170, 0.35);
   --border: #1a1a1a;
   --border-hover: #2a2a2a;
   --border-glass: rgba(255, 255, 255, 0.06);
-  --radius: 2rem;
-  --radius-sm: 1rem;
-  --radius-inner: calc(2rem - 0.375rem);
+  --radius: 1.5rem;
+  --radius-sm: 0.75rem;
+  --radius-inner: calc(1.5rem - 0.375rem);
   --max-width: 1200px;
   --space: clamp(1rem, 2vw, 1.5rem);
   --space-lg: clamp(2rem, 4vw, 3rem);
@@ -38,23 +39,25 @@
   --transition-spring: 700ms cubic-bezier(0.32, 0.72, 0, 1);
   --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --header-h: 72px;
+  --mode: technical;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #fafafa;
-    --bg-elevated: #ffffff;
-    --bg-card: #f5f5f5;
-    --fg: #0a0a0a;
-    --fg-muted: #525252;
-    --fg-subtle: #a3a3a3;
-    --accent: #008f6f;
-    --accent-dim: rgba(0, 143, 111, 0.1);
-    --accent-glow: rgba(0, 143, 111, 0.25);
-    --border: #e5e5e5;
-    --border-hover: #d4d4d4;
-    --border-glass: rgba(0, 0, 0, 0.06);
-  }
+[data-mode="creative"] {
+  /* === CREATIVE MODE (LIGHT) === */
+  --bg: #fafafa;
+  --bg-elevated: #ffffff;
+  --bg-card: #f5f5f5;
+  --fg: #0a0a0a;
+  --fg-muted: #525252;
+  --fg-subtle: #a3a3a3;
+  --accent: #6366f1;
+  --accent-dim: rgba(99, 102, 241, 0.1);
+  --accent-glow: rgba(99, 102, 241, 0.25);
+  --border: #e5e5e5;
+  --border-hover: #d4d4d4;
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --mode: creative;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -78,6 +81,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background 500ms ease, color 500ms ease;
 }
 
 body::before {
@@ -85,10 +89,11 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(0,212,170,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(0,212,170,0.03) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 30%, rgba(var(--accent-rgb), 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(var(--accent-rgb), 0.03) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
+  transition: opacity 500ms ease;
 }
 
 .skip-link {
@@ -117,30 +122,23 @@ header {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.75);
+  height: var(--header-h);
+  background: rgba(var(--bg-rgb), 0.8);
   backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border-glass);
-  transition: background var(--transition), border-color var(--transition);
-}
-
-@media (prefers-color-scheme: light) {
-  header { background: rgba(250, 250, 250, 0.75); }
+  transition: background 300ms ease, border-color 300ms ease;
 }
 
 header.scrolled {
-  background: rgba(5, 5, 5, 0.95);
+  background: rgba(var(--bg-rgb), 0.95);
   border-bottom-color: var(--border);
-}
-
-@media (prefers-color-scheme: light) {
-  header.scrolled { background: rgba(255, 255, 255, 0.95); }
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 100%;
   gap: var(--space);
 }
 
@@ -153,7 +151,6 @@ header.scrolled {
   letter-spacing: 0.05em;
   transition: color var(--transition), transform var(--transition);
 }
-
 .brand:hover { color: var(--fg); transform: translateY(-1px); }
 
 .nav-links {
@@ -171,7 +168,6 @@ header.scrolled {
   position: relative;
   padding-bottom: 4px;
 }
-
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -183,17 +179,35 @@ header.scrolled {
   border-radius: 2px;
   transition: width var(--transition-spring);
 }
-
-.nav-links a:hover {
-  color: var(--fg);
-  transform: translateY(-1px);
-}
-
+.nav-links a:hover { color: var(--fg); transform: translateY(-1px); }
 .nav-links a:hover::after { width: 100%; }
 
-@media (min-width: 768px) {
-  .nav-links { display: flex; }
+@media (min-width: 768px) { .nav-links { display: flex; } }
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
+.mode-toggle:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px var(--accent-glow);
+}
+.mode-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mode-toggle svg { width: 18px; height: 18px; transition: transform 300ms ease; }
+[data-mode="creative"] .mode-toggle .tech-icon { display: none; }
+:not([data-mode="creative"]) .mode-toggle .creative-icon { display: none; }
 
 .nav-cta {
   display: none;
@@ -209,22 +223,15 @@ header.scrolled {
   border-radius: 999px;
   transition: transform var(--transition), box-shadow var(--transition);
 }
+.nav-cta:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 48px -8px var(--accent-glow); }
+@media (min-width: 768px) { .nav-cta { display: inline-flex; } }
 
-.nav-cta:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 16px 48px -8px var(--accent-glow);
-}
-
-@media (min-width: 768px) {
-  .nav-cta { display: inline-flex; }
-}
-
-main { padding-top: 72px; }
+main { padding-top: var(--header-h); }
 
 section { padding: var(--space-xxl) 0; }
 
 .hero {
-  min-height: calc(100dvh - 72px);
+  min-height: calc(100dvh - var(--header-h));
   display: flex;
   align-items: center;
   position: relative;
@@ -236,8 +243,8 @@ section { padding: var(--space-xxl) 0; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 30%, rgba(0,212,170,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(0,212,170,0.03) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 30%, rgba(var(--accent-rgb), 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(var(--accent-rgb), 0.03) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -250,9 +257,7 @@ section { padding: var(--space-xxl) 0; }
 }
 
 @media (min-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1.15fr 0.85fr;
-  }
+  .hero-grid { grid-template-columns: 1.15fr 0.85fr; }
 }
 
 .hero-content { position: relative; z-index: 1; }
@@ -263,7 +268,7 @@ section { padding: var(--space-xxl) 0; }
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background: var(--accent-dim);
-  border: 1px solid rgba(0,212,170,0.25);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -273,17 +278,13 @@ section { padding: var(--space-xxl) 0; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-
 .badge::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 6px; height: 6px; border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 16px var(--accent-glow);
   animation: pulse 3s ease-in-out infinite;
 }
-
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 h1 {
@@ -293,7 +294,6 @@ h1 {
   letter-spacing: -0.03em;
   margin-bottom: 0.5rem;
 }
-
 h1 .accent { color: var(--accent); }
 
 .role {
@@ -301,18 +301,11 @@ h1 .accent { color: var(--accent); }
   font-size: clamp(0.875rem, 1.5vw, 1rem);
   color: var(--fg-muted);
   margin-bottom: var(--space);
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
+  display: flex; align-items: center; gap: 0.625rem;
 }
-
 .role::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .description {
@@ -323,605 +316,160 @@ h1 .accent { color: var(--accent); }
   margin-bottom: var(--space-xxl);
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.875rem;
-}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.875rem; }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 999px;
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600;
+  text-decoration: none; border-radius: 999px;
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
-  border: 1px solid transparent;
-  white-space: nowrap;
+  border: 1px solid transparent; white-space: nowrap;
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--bg);
-  position: relative;
-  overflow: hidden;
+  background: var(--accent); color: var(--bg); position: relative; overflow: hidden;
 }
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
+.btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%); opacity: 0; transition: opacity var(--transition); }
 .btn-primary:hover::before { opacity: 1; }
-
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 20px 64px -12px var(--accent-glow);
-}
-
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 64px -12px var(--accent-glow); }
 .btn-primary:active { transform: translateY(-1px) scale(0.99); }
 
-.btn-outline {
-  background: transparent;
-  color: var(--fg);
-  border-color: var(--border);
-}
+.btn-outline { background: transparent; color: var(--fg); border-color: var(--border); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); transform: translateY(-2px); }
 
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-dim);
-  transform: translateY(-2px);
-}
+.btn-ghost { background: transparent; color: var(--fg-muted); border-color: transparent; }
+.btn-ghost:hover { color: var(--fg); background: var(--accent-dim); }
 
 .hero-visual {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius);
-  overflow: hidden;
+  position: relative; aspect-ratio: 1 / 1;
+  border-radius: var(--radius); overflow: hidden;
   background: var(--bg-elevated);
-  box-shadow:
-    0 0 0 1px var(--border-glass),
-    0 40px 80px -20px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.03);
+  box-shadow: 0 0 0 1px var(--border-glass), 0 40px 80px -20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
 }
-
-@media (prefers-color-scheme: light) {
-  .hero-visual {
-    box-shadow:
-      0 0 0 1px var(--border-glass),
-      0 40px 80px -20px rgba(0,0,0,0.12),
-      inset 0 1px 0 rgba(255,255,255,0.5);
-  }
-}
-
-.hero-visual::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0,212,170,0.03) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.hero-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1200ms cubic-bezier(0.32, 0.72, 0, 1);
-}
-
+[data-mode="creative"] .hero-visual { box-shadow: 0 0 0 1px var(--border-glass), 0 40px 80px -20px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.5); }
+.hero-visual::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.03) 0%, transparent 60%); pointer-events: none; }
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms cubic-bezier(0.32, 0.72, 0, 1); }
 .hero-visual:hover img { transform: scale(1.03); }
 
 section h2 {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase;
   margin-bottom: var(--space-xxl);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex; align-items: center; gap: 1rem;
 }
-
-section h2::before {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-}
-
-@media (max-width: 599px) {
-  section h2::before { display: none; }
-}
+section h2::before { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+@media (max-width: 599px) { section h2::before { display: none; } }
 
 .section-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-lg);
+  display: grid; grid-template-columns: 1fr; gap: var(--space-lg);
 }
-
-@media (min-width: 768px) {
-  .section-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+@media (min-width: 768px) { .section-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .section-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .card {
-  position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  position: relative; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
   transition: border-color var(--transition-spring), transform var(--transition-spring), box-shadow var(--transition-spring);
 }
-
 .card::before {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  border-radius: var(--radius-inner);
-  border: 1px solid var(--border-glass);
-  pointer-events: none;
-  opacity: 0;
+  content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner);
+  border: 1px solid var(--border-glass); pointer-events: none; opacity: 0;
   transition: opacity var(--transition);
   background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
 }
-
-@media (prefers-color-scheme: light) {
-  .card::before {
-    background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%);
-  }
-}
-
-.card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-  box-shadow:
-    0 32px 64px -16px rgba(0,0,0,0.4),
-    0 0 0 1px var(--accent);
-}
-
-@media (prefers-color-scheme: light) {
-  .card:hover {
-    box-shadow:
-      0 32px 64px -16px rgba(0,0,0,0.15),
-      0 0 0 1px var(--accent);
-  }
-}
-
+[data-mode="creative"] .card::before { background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%); }
+.card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 32px 64px -16px rgba(0,0,0,0.4), 0 0 0 1px var(--accent); }
+[data-mode="creative"] .card:hover { box-shadow: 0 32px 64px -16px rgba(0,0,0,0.15), 0 0 0 1px var(--accent); }
 .card:hover::before { opacity: 1; }
 
-.card-inner {
-  padding: var(--space-xl);
-}
+.card-inner { padding: var(--space-xl); }
 
 .card-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  margin-bottom: var(--space-lg);
-  padding-bottom: var(--space-lg);
+  display: flex; flex-direction: column; gap: 0.625rem;
+  margin-bottom: var(--space-lg); padding-bottom: var(--space-lg);
   border-bottom: 1px solid var(--border);
 }
+@media (min-width: 600px) { .card-header { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
 
-@media (min-width: 600px) {
-  .card-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-}
-
-.card-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--fg);
-  line-height: 1.3;
-}
-
-.card-subtitle {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fg-muted);
-  line-height: 1.5;
-}
-
+.card-title { font-size: 1.125rem; font-weight: 600; color: var(--fg); line-height: 1.3; }
+.card-subtitle { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted); line-height: 1.5; }
 .card-date {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--fg-subtle);
-  white-space: nowrap;
-  background: var(--bg);
-  padding: 0.375rem 0.875rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  flex-shrink: 0;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--fg-subtle);
+  white-space: nowrap; background: var(--bg); padding: 0.375rem 0.875rem;
+  border-radius: 999px; border: 1px solid var(--border); flex-shrink: 0;
 }
 
-.card-bullets {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
+.card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+.card-bullets li { position: relative; padding-left: 1.5rem; font-size: 0.9375rem; color: var(--fg-muted); line-height: 1.65; transition: color var(--transition); }
+.card-bullets li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.6; transition: opacity var(--transition), transform var(--transition); }
+.card:hover .card-bullets li::before { opacity: 1; transform: scale(1.15); }
 
-.card-bullets li {
-  position: relative;
-  padding-left: 1.5rem;
-  font-size: 0.9375rem;
-  color: var(--fg-muted);
-  line-height: 1.65;
-  transition: color var(--transition);
-}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg); }
 
-.card-bullets li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55rem;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.6;
-  transition: opacity var(--transition), transform var(--transition);
-}
-
-.card:hover .card-bullets li::before {
-  opacity: 1;
-  transform: scale(1.15);
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-lg);
-}
-
-.skill-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color var(--transition-spring), transform var(--transition-spring);
-}
-
-.skill-card::before {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  border-radius: var(--radius-inner);
-  border: 1px solid var(--border-glass);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
-.skill-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-}
-
+.skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition-spring), transform var(--transition-spring); }
+.skill-card::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
+.skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
 .skill-card:hover::before { opacity: 1; }
+.skill-inner { padding: var(--space-xl); }
 
-.skill-inner {
-  padding: var(--space-xl);
-}
+.skill-category { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: var(--space-lg); display: flex; align-items: center; gap: 0.5rem; }
+.skill-category::before { content: ''; width: 4px; height: 14px; background: var(--accent); border-radius: 2px; }
 
-.skill-category {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-lg);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.skill-category::before {
-  content: '';
-  width: 4px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.375rem 0.875rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--fg-muted);
-  transition: border-color var(--transition), color var(--transition), background var(--transition), transform var(--transition);
-}
-
-.tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-dim);
-  transform: translateY(-1px);
-}
-
-.tag-primary { color: var(--accent); border-color: rgba(0,212,170,0.25); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.375rem 0.875rem; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; color: var(--fg-muted); transition: border-color var(--transition), color var(--transition), background var(--transition), transform var(--transition); }
+.tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); transform: translateY(-1px); }
+.tag-primary { color: var(--accent); border-color: rgba(var(--accent-rgb), 0.25); }
 .tag-blue { color: #3b82f6; border-color: rgba(59,130,246,0.25); }
 .tag-green { color: #10b981; border-color: rgba(16,185,129,0.25); }
+.tag-purple { color: #a855f7; border-color: rgba(168,85,247,0.25); }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-lg);
-}
+.projects-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); }
+@media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
 
-@media (min-width: 768px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 1024px) {
-  .projects-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.project-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: border-color var(--transition-spring), transform var(--transition-spring);
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  border-radius: var(--radius-inner);
-  border: 1px solid var(--border-glass);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
-.project-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-}
-
+.project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color var(--transition-spring), transform var(--transition-spring); }
+.project-card::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
+.project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
 .project-card:hover::before { opacity: 1; }
 
-.project-header {
-  padding: var(--space-lg);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
+.project-header { padding: var(--space-lg); border-bottom: 1px solid var(--border); background: var(--bg); }
+.project-name { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600; color: var(--fg); margin-bottom: 0.375rem; }
+.project-desc { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.55; }
+.project-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: var(--space-lg); margin-top: auto; }
+.project-lang { display: inline-flex; align-items: center; gap: 0.375rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--fg-subtle); }
+.project-lang::before { content: ''; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.project-stats { display: flex; gap: 1rem; margin-left: auto; font-family: var(--font-mono); font-size: 0.65rem; color: var(--fg-subtle); }
+.project-link { display: block; padding: var(--space-lg); text-align: center; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); text-decoration: none; background: var(--accent-dim); border-top: 1px solid var(--border); transition: color var(--transition), background var(--transition); }
+.project-link:hover { color: var(--fg); background: var(--bg); }
 
-.project-name {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 0.375rem;
-}
+.blog-teaser { text-align: center; padding: var(--space-xl); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+.blog-teaser h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+.blog-teaser p { color: var(--fg-muted); margin-bottom: var(--space-lg); }
 
-.project-desc {
-  font-size: 0.875rem;
-  color: var(--fg-muted);
-  line-height: 1.55;
-}
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg); }
 
-.project-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: var(--space-lg);
-  margin-top: auto;
-}
-
-.project-lang {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--fg-subtle);
-}
-
-.project-lang::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.project-stats {
-  display: flex;
-  gap: 1rem;
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--fg-subtle);
-}
-
-.project-link {
-  display: block;
-  padding: var(--space-lg);
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  background: var(--accent-dim);
-  border-top: 1px solid var(--border);
-  transition: color var(--transition), background var(--transition), color var(--transition);
-}
-
-.project-link:hover {
-  color: var(--fg);
-  background: var(--bg);
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--space-lg);
-}
-
-.contact-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: var(--space-xl);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color var(--transition-spring), transform var(--transition-spring);
-  position: relative;
-  overflow: hidden;
-}
-
-.contact-item::before {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  border-radius: var(--radius-inner);
-  border: 1px solid var(--border-glass);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
-.contact-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-}
-
+.contact-item { display: flex; align-items: flex-start; gap: 1rem; padding: var(--space-xl); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color var(--transition-spring), transform var(--transition-spring); position: relative; overflow: hidden; }
+.contact-item::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
+.contact-item:hover { border-color: var(--accent); transform: translateY(-4px); }
 .contact-item:hover::before { opacity: 1; }
 
-.contact-icon {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent-dim);
-  border-radius: var(--radius-sm);
-  color: var(--accent);
-  font-size: 1.25rem;
-  flex-shrink: 0;
-  transition: transform var(--transition-spring), background var(--transition);
-}
+.contact-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--accent-dim); border-radius: var(--radius-sm); color: var(--accent); font-size: 1.25rem; flex-shrink: 0; transition: transform var(--transition-spring), background var(--transition); }
+.contact-item:hover .contact-icon { transform: scale(1.1) rotate(-3deg); background: var(--accent); color: var(--bg); }
 
-.contact-item:hover .contact-icon {
-  transform: scale(1.1) rotate(-3deg);
-  background: var(--accent);
-  color: var(--bg);
-}
+.contact-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.contact-label { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--fg-subtle); letter-spacing: 0.08em; text-transform: uppercase; }
+.contact-value { font-size: 0.9375rem; color: var(--fg); font-weight: 500; }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
+footer { padding: var(--space-xxl) 0; border-top: 1px solid var(--border); text-align: center; }
+.footer-text { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--fg-subtle); margin-bottom: 0.75rem; }
+.footer-status { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-subtle); display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.status-item { display: flex; align-items: center; gap: 0.5rem; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); animation: pulse 3s ease-in-out infinite; }
 
-.contact-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--fg-subtle);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.contact-value {
-  font-size: 0.9375rem;
-  color: var(--fg);
-  font-weight: 500;
-}
-
-footer {
-  padding: var(--space-xxl) 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-
-.footer-text {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--fg-subtle);
-  margin-bottom: 0.75rem;
-}
-
-.footer-status {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--fg-subtle);
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.status-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 800ms cubic-bezier(0.32, 0.72, 0, 1), transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms cubic-bezier(0.32, 0.72, 0, 1), transform 800ms cubic-bezier(0.32, 0.72, 0, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 .stagger-1 { transition-delay: 100ms; }
 .stagger-2 { transition-delay: 200ms; }
 .stagger-3 { transition-delay: 300ms; }
@@ -941,8 +489,14 @@ footer {
       <li><a href="#education">Formación</a></li>
       <li><a href="#skills">Stack</a></li>
       <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contacto</a></li>
     </ul>
+    <button class="mode-toggle" aria-label="Cambiar modo" id="mode-toggle">
+      <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/><polyline points="15 3 15 9 21 9"/></svg>
+      <svg class="creative-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span id="mode-label">Técnico</span>
+    </button>
     <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="nav-cta">GitHub</a>
   </nav>
 </header>
@@ -961,6 +515,7 @@ footer {
           <div class="hero-actions">
             <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="cta-github">Ver GitHub</a>
             <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="cta-linkedin">LinkedIn</a>
+            <a href="#blog" class="btn btn-ghost" id="cta-blog">Blog</a>
           </div>
         </div>
         <aside class="hero-visual" aria-hidden="true">
@@ -973,206 +528,56 @@ footer {
   <section id="experience" class="container reveal stagger-1" aria-labelledby="exp-title">
     <h2 id="exp-title">Experiencia</h2>
     <div class="section-grid">
-      <article class="card">
-        <div class="card-inner">
-          <header class="card-header">
-            <div>
-              <h3 class="card-title" id="exp1-title">Prácticas — Becario IT</h3>
-              <p class="card-subtitle" id="exp1-company">Industrias Duero · Metalurgia y estructuras viales/civiles</p>
-            </div>
-            <time class="card-date" datetime="2024">2024 — presente</time>
-          </header>
-          <ul class="card-bullets">
-            <li id="exp1-1">Soporte y mantenimiento de infraestructura de red en entorno industrial internacional.</li>
-            <li id="exp1-2">Aplicación de soluciones de conectividad y seguridad en planta de producción metalúrgica.</li>
-            <li id="exp1-3">Coordinación con equipos multidisciplinares en proyectos de infraestructura civil.</li>
-          </ul>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card-inner">
-          <header class="card-header">
-            <div>
-              <h3 class="card-title" id="exp2-title">Piscina 42 Madrid</h3>
-              <p class="card-subtitle" id="exp2-company">Programa de estudios Telefónica · 42 Madrid</p>
-            </div>
-            <time class="card-date" datetime="2023">2023</time>
-          </header>
-          <ul class="card-bullets">
-            <li id="exp2-1">Formación intensiva en programación en C y resolución de problemas en entorno peer-to-peer.</li>
-            <li id="exp2-2">Proyectos colaborativos bajo metodología de aprendizaje autónomo.</li>
-          </ul>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card-inner">
-          <header class="card-header">
-            <div>
-              <h3 class="card-title" id="exp3-title">Homelab — Infraestructura Doméstica</h3>
-              <p class="card-subtitle" id="exp3-company">Proyecto personal · TrueNAS + Redes</p>
-            </div>
-            <time class="card-date" datetime="2022">2022 — presente</time>
-          </header>
-          <ul class="card-bullets">
-            <li id="exp3-1">Despliegue y administración de servidor NAS con TrueNAS para almacenamiento y servicios.</li>
-            <li id="exp3-2">Configuración de VPN (WireGuard / Tailscale) para acceso remoto seguro.</li>
-            <li id="exp3-3">Filtrado de DNS y bloqueo de publicidad con AdGuard Home a nivel de red.</li>
-            <li id="exp3-4">Gestión de routers y configuración avanzada de redes locales y VLANs.</li>
-            <li id="exp3-5">Despliegue de aplicaciones open-source orientadas a red y autoalojamiento.</li>
-          </ul>
-        </div>
-      </article>
+      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp1-title">Prácticas — Becario IT</h3><p class="card-subtitle" id="exp1-company">Industrias Duero · Metalurgia y estructuras viales/civiles</p></div><time class="card-date" datetime="2024">2024 — presente</time></header><ul class="card-bullets"><li id="exp1-1">Soporte y mantenimiento de infraestructura de red en entorno industrial internacional.</li><li id="exp1-2">Aplicación de soluciones de conectividad y seguridad en planta de producción metalúrgica.</li><li id="exp1-3">Coordinación con equipos multidisciplinares en proyectos de infraestructura civil.</li></ul></div></article>
+      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp2-title">Piscina 42 Madrid</h3><p class="card-subtitle" id="exp2-company">Programa de estudios Telefónica · 42 Madrid</p></div><time class="card-date" datetime="2023">2023</time></header><ul class="card-bullets"><li id="exp2-1">Formación intensiva en programación en C y resolución de problemas en entorno peer-to-peer.</li><li id="exp2-2">Proyectos colaborativos bajo metodología de aprendizaje autónomo.</li></ul></div></article>
+      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp3-title">Homelab — Infraestructura Doméstica</h3><p class="card-subtitle" id="exp3-company">Proyecto personal · TrueNAS + Redes</p></div><time class="card-date" datetime="2022">2022 — presente</time></header><ul class="card-bullets"><li id="exp3-1">Despliegue y administración de servidor NAS con TrueNAS para almacenamiento y servicios.</li><li id="exp3-2">Configuración de VPN (WireGuard / Tailscale) para acceso remoto seguro.</li><li id="exp3-3">Filtrado de DNS y bloqueo de publicidad con AdGuard Home a nivel de red.</li><li id="exp3-4">Gestión de routers y configuración avanzada de redes locales y VLANs.</li><li id="exp3-5">Despliegue de aplicaciones open-source orientadas a red y autoalojamiento.</li></ul></div></article>
     </div>
   </section>
 
   <section id="education" class="container reveal stagger-2" aria-labelledby="edu-title">
     <h2 id="edu-title">Formación</h2>
     <div class="section-grid">
-      <article class="card">
-        <div class="card-inner">
-          <header class="card-header">
-            <div>
-              <h3 class="card-title" id="edu1-title">Grado en Ingeniería de Computadores</h3>
-              <p class="card-subtitle" id="edu1-school">Universidad Politécnica de Madrid</p>
-            </div>
-            <time class="card-date" datetime="2020">2020 — en curso</time>
-          </header>
-          <p id="edu1-desc">Especialización en redes, sistemas y arquitecturas de computadores.</p>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card-inner">
-          <header class="card-header">
-            <div>
-              <h3 class="card-title" id="edu2-title">Bachillerato Científico</h3>
-              <p class="card-subtitle" id="edu2-school">I.E.S. Campiña Alta</p>
-            </div>
-            <time class="card-date" datetime="2018-2020">2018 — 2020</time>
-          </header>
-        </div>
-      </article>
+      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="edu1-title">Grado en Ingeniería de Computadores</h3><p class="card-subtitle" id="edu1-school">Universidad Politécnica de Madrid</p></div><time class="card-date" datetime="2020">2020 — en curso</time></header><p id="edu1-desc">Especialización en redes, sistemas y arquitecturas de computadores.</p></div></article>
+      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="edu2-title">Bachillerato Científico</h3><p class="card-subtitle" id="edu2-school">I.E.S. Campiña Alta</p></div><time class="card-date" datetime="2018-2020">2018 — 2020</time></header></div></article>
     </div>
   </section>
 
   <section id="skills" class="container reveal stagger-3" aria-labelledby="skills-title">
     <h2 id="skills-title">Stack técnico</h2>
     <div class="skills-grid">
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill1-cat">Redes</p>
-          <div class="skill-tags">
-            <span class="tag">TCP/IP</span>
-            <span class="tag">DNS</span>
-            <span class="tag">DHCP</span>
-            <span class="tag">VLANs</span>
-            <span class="tag">Routing</span>
-            <span class="tag">Firewalls</span>
-            <span class="tag">NAT</span>
-          </div>
-        </div>
-      </article>
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill2-cat">VPN & Tunelado</p>
-          <div class="skill-tags">
-            <span class="tag tag-blue">WireGuard</span>
-            <span class="tag tag-blue">Tailscale</span>
-            <span class="tag tag-blue">Site-to-Site</span>
-            <span class="tag tag-blue">SSH Tunnels</span>
-          </div>
-        </div>
-      </article>
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill3-cat">Seguridad</p>
-          <div class="skill-tags">
-            <span class="tag tag-green">AdGuard Home</span>
-            <span class="tag tag-green">DNS Filtering</span>
-            <span class="tag tag-green">Hardening</span>
-            <span class="tag tag-green">Cybersecurity</span>
-          </div>
-        </div>
-      </article>
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill4-cat">Sistemas & Servidores</p>
-          <div class="skill-tags">
-            <span class="tag">TrueNAS</span>
-            <span class="tag">Linux</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Self-Hosting</span>
-            <span class="tag">Open-Source</span>
-          </div>
-        </div>
-      </article>
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill5-cat">Hardware & Homelab</p>
-          <div class="skill-tags">
-            <span class="tag tag-blue">Routers</span>
-            <span class="tag tag-blue">Switches</span>
-            <span class="tag tag-blue">NAS</span>
-            <span class="tag tag-blue">Mini-PC</span>
-            <span class="tag tag-blue">Cabling</span>
-          </div>
-        </div>
-      </article>
-      <article class="skill-card">
-        <div class="skill-inner">
-          <p class="skill-category" id="skill6-cat">Lenguajes</p>
-          <div class="skill-tags">
-            <span class="tag tag-green">Python</span>
-            <span class="tag tag-green">Ada</span>
-            <span class="tag tag-green">Bash</span>
-            <span class="tag tag-green">C</span>
-            <span class="tag tag-green">JavaScript</span>
-          </div>
-        </div>
-      </article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill1-cat">Redes</p><div class="skill-tags"><span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag">VLANs</span><span class="tag">Routing</span><span class="tag">Firewalls</span><span class="tag">NAT</span></div></div></article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill2-cat">VPN & Tunelado</p><div class="skill-tags"><span class="tag tag-blue">WireGuard</span><span class="tag tag-blue">Tailscale</span><span class="tag tag-blue">Site-to-Site</span><span class="tag tag-blue">SSH Tunnels</span></div></div></article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill3-cat">Seguridad</p><div class="skill-tags"><span class="tag tag-green">AdGuard Home</span><span class="tag tag-green">DNS Filtering</span><span class="tag tag-green">Hardening</span><span class="tag tag-green">Cybersecurity</span></div></div></article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill4-cat">Sistemas & Servidores</p><div class="skill-tags"><span class="tag">TrueNAS</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Self-Hosting</span><span class="tag">Open-Source</span></div></div></article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill5-cat">Hardware & Homelab</p><div class="skill-tags"><span class="tag tag-blue">Routers</span><span class="tag tag-blue">Switches</span><span class="tag tag-blue">NAS</span><span class="tag tag-blue">Mini-PC</span><span class="tag tag-blue">Cabling</span></div></div></article>
+      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill6-cat">Lenguajes</p><div class="skill-tags"><span class="tag tag-green">Python</span><span class="tag tag-green">Ada</span><span class="tag tag-green">Bash</span><span class="tag tag-green">C</span><span class="tag tag-green">JavaScript</span></div></div></article>
     </div>
   </section>
 
   <section id="projects" class="container reveal stagger-4" aria-labelledby="projects-title">
     <h2 id="projects-title">Proyectos destacados</h2>
-    <div class="projects-grid" id="projects-grid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="projects-grid" id="projects-grid"><!-- Populated by JS --></div>
     <div style="text-align:center; margin-top: var(--space-xxl);">
       <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="view-all-repos">Ver todos en GitHub</a>
     </div>
   </section>
 
-  <section id="contact" class="container reveal stagger-5" aria-labelledby="contact-title">
+  <section id="blog" class="container reveal stagger-5" aria-labelledby="blog-title">
+    <h2 id="blog-title">Blog & Escritos</h2>
+    <div class="blog-teaser">
+      <h3 id="blog-teaser-title">Próximamente en GitHub Pages</h3>
+      <p id="blog-teaser-desc">Artículos técnicos sobre networking, homelab, seguridad y open-source. En construcción...</p>
+      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="blog-cta">Seguir en GitHub</a>
+    </div>
+  </section>
+
+  <section id="contact" class="container reveal stagger-6" aria-labelledby="contact-title">
     <h2 id="contact-title">Contacto</h2>
     <div class="contact-grid">
-      <a href="mailto:manuehernandez@protonmail.com" class="contact-item">
-        <span class="contact-icon" aria-hidden="true">✉</span>
-        <div class="contact-info">
-          <span class="contact-label" id="contact1-label">Email</span>
-          <span class="contact-value">manuehernandez@protonmail.com</span>
-        </div>
-      </a>
-      <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener noreferrer" class="contact-item">
-        <span class="contact-icon" aria-hidden="true">in</span>
-        <div class="contact-info">
-          <span class="contact-label" id="contact2-label">LinkedIn</span>
-          <span class="contact-value">manu-hdez</span>
-        </div>
-      </a>
-      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="contact-item">
-        <span class="contact-icon" aria-hidden="true">GH</span>
-        <div class="contact-info">
-          <span class="contact-label" id="contact3-label">GitHub</span>
-          <span class="contact-value">Mnu-Hdez</span>
-        </div>
-      </a>
-      <div class="contact-item">
-        <span class="contact-icon" aria-hidden="true">📍</span>
-        <div class="contact-info">
-          <span class="contact-label" id="contact4-label">Ubicación</span>
-          <span class="contact-value" id="contact4-value">Guadalajara, España</span>
-        </div>
-      </div>
+      <a href="mailto:manuehernandez@protonmail.com" class="contact-item"><span class="contact-icon" aria-hidden="true">✉</span><div class="contact-info"><span class="contact-label" id="contact1-label">Email</span><span class="contact-value">manuehernandez@protonmail.com</span></div></a>
+      <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener noreferrer" class="contact-item"><span class="contact-icon" aria-hidden="true">in</span><div class="contact-info"><span class="contact-label" id="contact2-label">LinkedIn</span><span class="contact-value">manu-hdez</span></div></a>
+      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="contact-item"><span class="contact-icon" aria-hidden="true">GH</span><div class="contact-info"><span class="contact-label" id="contact3-label">GitHub</span><span class="contact-value">Mnu-Hdez</span></div></a>
+      <div class="contact-item"><span class="contact-icon" aria-hidden="true">📍</span><div class="contact-info"><span class="contact-label" id="contact4-label">Ubicación</span><span class="contact-value" id="contact4-value">Guadalajara, España</span></div></div>
     </div>
   </section>
 </main>
@@ -1181,14 +586,8 @@ footer {
   <div class="container">
     <p class="footer-text" id="footer-copyright">Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES</p>
     <div class="footer-status">
-      <span class="status-item">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span id="uptime-text">uptime: —</span>
-      </span>
-      <span class="status-item">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span id="status-text">status: OK</span>
-      </span>
+      <span class="status-item"><span class="status-dot" aria-hidden="true"></span><span id="uptime-text">uptime: —</span></span>
+      <span class="status-item"><span class="status-dot" aria-hidden="true"></span><span id="status-text">status: OK</span></span>
     </div>
   </div>
 </footer>
@@ -1201,8 +600,7 @@ const I18N = {
     'hero-title': 'Manuel Moreno <span class="accent">Hernández</span>',
     'role-text': '// Ingeniería de Computadores · UPM · Madrid',
     'description-text': 'Ingeniero de Computadores especializado en infraestructura de redes, ciberseguridad y soluciones open-source. Actualmente en prácticas en Industrias Duero aplicando networking en entornos industriales.',
-    'cta-github': 'Ver GitHub',
-    'cta-linkedin': 'LinkedIn',
+    'cta-github': 'Ver GitHub', 'cta-linkedin': 'LinkedIn', 'cta-blog': 'Blog',
     'exp-title': 'Experiencia',
     'exp1-title': 'Prácticas — Becario IT',
     'exp1-company': 'Industrias Duero · Metalurgia y estructuras viales/civiles',
@@ -1227,33 +625,24 @@ const I18N = {
     'edu2-title': 'Bachillerato Científico',
     'edu2-school': 'I.E.S. Campiña Alta',
     'skills-title': 'Stack técnico',
-    'skill1-cat': 'Redes',
-    'skill2-cat': 'VPN & Tunelado',
-    'skill3-cat': 'Seguridad',
-    'skill4-cat': 'Sistemas & Servidores',
-    'skill5-cat': 'Hardware & Homelab',
-    'skill6-cat': 'Lenguajes',
-    'projects-title': 'Proyectos destacados',
-    'view-all-repos': 'Ver todos en GitHub',
+    'skill1-cat': 'Redes', 'skill2-cat': 'VPN & Tunelado', 'skill3-cat': 'Seguridad',
+    'skill4-cat': 'Sistemas & Servidores', 'skill5-cat': 'Hardware & Homelab', 'skill6-cat': 'Lenguajes',
+    'projects-title': 'Proyectos destacados', 'view-all-repos': 'Ver todos en GitHub',
+    'blog-title': 'Blog y Escritos', 'blog-teaser-title': 'Próximamente en GitHub Pages',
+    'blog-teaser-desc': 'Artículos técnicos sobre networking, homelab, seguridad y open-source. En construcción...',
+    'blog-cta': 'Seguir en GitHub',
     'contact-title': 'Contacto',
-    'contact1-label': 'Email',
-    'contact2-label': 'LinkedIn',
-    'contact3-label': 'GitHub',
-    'contact4-label': 'Ubicación',
+    'contact1-label': 'Email', 'contact2-label': 'LinkedIn', 'contact3-label': 'GitHub', 'contact4-label': 'Ubicación',
     'contact4-value': 'Guadalajara, España',
     'footer-copyright': 'Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES',
-    'uptime-text': 'uptime: —',
-    'status-text': 'status: OK',
-    'no-desc': 'Sin descripción.',
-    'view-repo': 'Ver repositorio'
+    'uptime-text': 'uptime: —', 'status-text': 'status: OK', 'no-desc': 'Sin descripción.', 'view-repo': 'Ver repositorio'
   },
   en: {
     'availability-badge': 'Open to opportunities',
     'hero-title': 'Manuel Moreno <span class="accent">Hernández</span>',
     'role-text': '// Computer Engineering · UPM · Madrid',
     'description-text': 'Computer Engineering student specialized in network infrastructure, perimeter security and open-source solutions. Currently interning at an international metallurgy company applying networking in industrial environments.',
-    'cta-github': 'View GitHub',
-    'cta-linkedin': 'LinkedIn',
+    'cta-github': 'View GitHub', 'cta-linkedin': 'LinkedIn', 'cta-blog': 'Blog',
     'exp-title': 'Experience',
     'exp1-title': 'Internship — IT Trainee',
     'exp1-company': 'Industrias Duero · Metallurgy & road/civil structures',
@@ -1278,150 +667,108 @@ const I18N = {
     'edu2-title': 'Scientific Baccalaureate',
     'edu2-school': 'I.E.S. Campiña Alta',
     'skills-title': 'Tech Stack',
-    'skill1-cat': 'Networking',
-    'skill2-cat': 'VPN & Tunneling',
-    'skill3-cat': 'Security',
-    'skill4-cat': 'Systems & Servers',
-    'skill5-cat': 'Hardware & Homelab',
-    'skill6-cat': 'Languages',
-    'projects-title': 'Featured Projects',
-    'view-all-repos': 'See all on GitHub',
+    'skill1-cat': 'Networking', 'skill2-cat': 'VPN & Tunneling', 'skill3-cat': 'Security',
+    'skill4-cat': 'Systems & Servers', 'skill5-cat': 'Hardware & Homelab', 'skill6-cat': 'Languages',
+    'projects-title': 'Featured Projects', 'view-all-repos': 'See all on GitHub',
+    'blog-title': 'Blog & Writing', 'blog-teaser-title': 'Coming soon on GitHub Pages',
+    'blog-teaser-desc': 'Technical articles on networking, homelab, security and open-source. Under construction...',
+    'blog-cta': 'Follow on GitHub',
     'contact-title': 'Contact',
-    'contact1-label': 'Email',
-    'contact2-label': 'LinkedIn',
-    'contact3-label': 'GitHub',
-    'contact4-label': 'Location',
+    'contact1-label': 'Email', 'contact2-label': 'LinkedIn', 'contact3-label': 'GitHub', 'contact4-label': 'Location',
     'contact4-value': 'Guadalajara, Spain',
     'footer-copyright': 'Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES',
-    'uptime-text': 'uptime: —',
-    'status-text': 'status: OK',
-    'no-desc': 'No description.',
-    'view-repo': 'View repository'
+    'uptime-text': 'uptime: —', 'status-text': 'status: OK', 'no-desc': 'No description.', 'view-repo': 'View repository'
   }
 };
 
+// === Theme State ===
+const THEMES = {
+  technical: { '--accent-rgb': '0, 212, 170', '--bg-rgb': '4, 4, 4' },
+  creative: { '--accent-rgb': '99, 102, 241', '--bg-rgb': '250, 250, 250' }
+};
+
+let currentMode = 'technical';
+
+function setMode(mode) {
+  currentMode = mode;
+  document.documentElement.setAttribute('data-mode', mode);
+  document.getElementById('mode-label').textContent = mode === 'technical' ? 'Técnico' : 'Creativo';
+  const vars = THEMES[mode];
+  Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+  localStorage.setItem('mode', mode);
+}
+
+function toggleMode() {
+  setMode(currentMode === 'technical' ? 'creative' : 'technical');
+}
+
 // === Language Detection ===
 function detectLanguage() {
-  try {
-    const stored = localStorage.getItem('lang');
-    if (stored && I18N[stored]) return stored;
-  } catch (e) {}
+  try { const stored = localStorage.getItem('lang'); if (stored && I18N[stored]) return stored; } catch (e) {}
   const langs = navigator.languages || [navigator.language || 'en'];
-  for (const lang of langs) {
-    const prefix = lang.toLowerCase().split('-')[0];
-    if (I18N[prefix]) return prefix;
-  }
+  for (const lang of langs) { const prefix = lang.toLowerCase().split('-')[0]; if (I18N[prefix]) return prefix; }
   return 'en';
 }
 
-// === Apply Translations ===
 function applyLanguage(lang) {
-  const dict = I18N[lang];
-  if (!dict) return;
+  const dict = I18N[lang]; if (!dict) return;
   document.documentElement.lang = lang;
-  Object.entries(dict).forEach(([id, html]) => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
-  });
+  Object.entries(dict).forEach(([id, html]) => { const el = document.getElementById(id); if (el) el.innerHTML = html; });
   try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
 // === GitHub Repos ===
 async function loadRepos() {
-  const grid = document.getElementById('projects-grid');
-  if (!grid) return;
-  const langColors = {
-    Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6',
-    Shell: '#89e051', C: '#555', 'C++': '#f34b7d',
-    HTML: '#e34c26', CSS: '#563d7c', Go: '#00ADD8', Rust: '#dea584',
-  };
+  const grid = document.getElementById('projects-grid'); if (!grid) return;
+  const langColors = { Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6', Shell: '#89e051', C: '#555', 'C++': '#f34b7d', HTML: '#e34c26', CSS: '#563d7c', Go: '#00ADD8', Rust: '#dea584' };
   const currentLang = detectLanguage();
   try {
     const res = await fetch('https://api.github.com/users/Mnu-Hdez/repos?sort=updated&per_page=100');
     if (!res.ok) throw new Error('GitHub API: ' + res.status);
     const data = await res.json();
-    const repos = data
-      .filter(r => !r.fork)
-      .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
-      .slice(0, 4);
-    if (!repos.length) {
-      grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">' + I18N[currentLang]['no-desc'] + '</p>';
-      return;
-    }
-    grid.innerHTML = repos.map(r => {
+    const repos = data.filter(r => !r.fork).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 4);
+    if (!repos.length) { grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">' + I18N[currentLang]['no-desc'] + '</p>'; return; }
+    grid.innerHTML = repos.map((r, i) => {
       const color = langColors[r.language] || 'var(--accent)';
       const desc = r.description ? escapeHtml(r.description) : I18N[currentLang]['no-desc'];
-      return `
-        <article class="project-card reveal stagger-${Math.floor(Math.random()*4)+1}">
-          <header class="project-header">
-            <h3 class="project-name">${escapeHtml(r.name)}</h3>
-            <p class="project-desc">${desc}</p>
-          </header>
-          <div class="project-meta">
-            ${r.language ? '<span class="project-lang" style="--lang-color:'+color+'"><span style="background:var(--lang-color)"></span>'+escapeHtml(r.language)+'</span>' : ''}
-            <div class="project-stats">
-              <span>★ '+r.stargazers_count+'</span>
-              <span>⑂ '+r.forks_count+'</span>
-            </div>
-          </div>
-          <a href="'+r.html_url+'" target="_blank" rel="noopener noreferrer" class="project-link">'+I18N[currentLang]['view-repo']+'</a>
-        </article>
-      `;
+      return `<article class="project-card reveal stagger-${(i%4)+1}"><header class="project-header"><h3 class="project-name">${escapeHtml(r.name)}</h3><p class="project-desc">${desc}</p></header><div class="project-meta">${r.language ? '<span class="project-lang" style="--lang-color:'+color+'"><span style="background:var(--lang-color)"></span>'+escapeHtml(r.language)+'</span>' : ''}<div class="project-stats"><span>★ '+r.stargazers_count+'</span><span>⑂ '+r.forks_count+'</span></div></div><a href="'+r.html_url+'" target="_blank" rel="noopener noreferrer" class="project-link">'+I18N[currentLang]['view-repo']+'</a></article>';
     }).join('');
-  } catch (err) {
-    grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">Could not load repositories.</p>';
-  }
+    initScrollReveal(); // re-init for new cards
+  } catch (err) { grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">Could not load repositories.</p>'; }
 }
 
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''})[c]);
-}
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''})[c]); }
 
 // === Scroll Reveal ===
 function initScrollReveal() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-// === Header Scroll State ===
+// === Header Scroll ===
 function initHeaderScroll() {
-  const header = document.querySelector('header');
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    header.classList.toggle('scrolled', y > 20);
-    lastY = y;
-  }, { passive: true });
+  const header = document.querySelector('header'); let lastY = 0;
+  window.addEventListener('scroll', () => { const y = window.scrollY; header.classList.toggle('scrolled', y > 20); lastY = y; }, { passive: true });
 }
 
-// === Uptime Counter ===
+// === Uptime ===
 function initUptime() {
   const start = new Date('2022-01-01T00:00:00Z');
-  const fmt = (ms) => {
-    const s = Math.floor(ms / 1000);
-    const d = Math.floor(s / 86400);
-    const h = Math.floor((s % 86400) / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    return d+'d '+h+'h '+m+'m';
-  };
-  const update = () => {
-    const txt = fmt(Date.now() - start.getTime());
-    const el = document.getElementById('uptime-text');
-    if (el) el.textContent = 'uptime: '+txt;
-  };
-  update();
-  setInterval(update, 60000);
+  const fmt = (ms) => { const s = Math.floor(ms/1000), d = Math.floor(s/86400), h = Math.floor((s%86400)/3600), m = Math.floor((s%3600)/60); return d+'d '+h+'h '+m+'m'; };
+  const update = () => { const txt = fmt(Date.now()-start.getTime()); const el = document.getElementById('uptime-text'); if (el) el.textContent = 'uptime: '+txt; };
+  update(); setInterval(update, 60000);
 }
 
 // === Init ===
 document.addEventListener('DOMContentLoaded', () => {
+  // Restore mode
+  const savedMode = localStorage.getItem('mode');
+  if (savedMode && THEMES[savedMode]) setMode(savedMode);
+  else setMode('technical');
+
+  document.getElementById('mode-toggle').addEventListener('click', toggleMode);
   applyLanguage(detectLanguage());
   loadRepos();
   initScrollReveal();
@@ -1430,4 +777,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html><!-- v2 -->
+</html>
