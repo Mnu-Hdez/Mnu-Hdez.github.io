@@ -47,7 +47,7 @@
     document.getElementById('experience'),
     document.getElementById('education'),
     document.getElementById('certs'),
-    document.querySelector('section:nth-of-type(7)'),
+    document.getElementById('languages'),
     document.getElementById('contact'),
   ];
 
