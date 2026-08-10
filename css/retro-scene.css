@@ -1,0 +1,240 @@
+/* ===== RETRO COMPUTER SCENE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.scene-wrap {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  width: 220px;
+  height: 200px;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+.scene-wrap:hover { opacity: 1; }
+@media (max-width: 768px) {
+  .scene-wrap { width: 160px; height: 145px; bottom: 12px; right: 12px; }
+}
+
+/* Grass base */
+.grass {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40px;
+  background: linear-gradient(180deg, #4a9d3f 0%, #3a7a32 60%, #2d5f27 100%);
+  border-radius: 50% 50% 0 0 / 20px 20px 0 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+.grass::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px, transparent 3px,
+    rgba(255,255,255,0.06) 3px, rgba(255,255,255,0.06) 4px
+  );
+  border-radius: inherit;
+}
+.grass::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; right: 10%;
+  height: 6px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+/* Cloud connection — antenna line going up to a cloud */
+.cloud-link {
+  position: absolute;
+  top: 0; right: 30px;
+  width: 2px; height: 55px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,113,227,0.4) 30%, rgba(0,113,227,0.6) 100%);
+}
+.cloud-link::after {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Cloud */
+.cloud {
+  position: absolute;
+  top: -5px; right: 8px;
+  width: 40px; height: 22px;
+  background: #e8e8ec;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.cloud::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: 6px;
+  width: 16px; height: 16px;
+  background: #e8e8ec;
+  border-radius: 50%;
+}
+.cloud::after {
+  content: '';
+  position: absolute;
+  top: -5px; right: 4px;
+  width: 12px; height: 12px;
+  background: #e8e8ec;
+  border-radius: 50%;
+}
+@media (prefers-color-scheme: dark) {
+  .cloud { background: #3a3a3c; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .cloud::before, .cloud::after { background: #3a3a3c; }
+}
+
+/* Retro computer body — CRT monitor on a base */
+puter {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+}
+@media (max-width: 768px) { .puter { width: 115px; } }
+
+/* Monitor shell */
+.crt {
+  position: relative;
+  width: 100%;
+  background: #d4d0c8;
+  border-radius: 8px 8px 4px 4px;
+  padding: 10px 10px 8px;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.5),
+    inset 0 -2px 0 rgba(0,0,0,0.15),
+    0 4px 12px rgba(0,0,0,0.12);
+}
+@media (max-width: 768px) { .crt { padding: 7px 7px 6px; } }
+
+/* Screen */
+.crt-screen {
+  background: #1a1a2e;
+  border-radius: 4px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #2a2a3e;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
+}
+@media (max-width: 768px) { .crt-screen { height: 52px; } }
+
+/* Scanlines overlay */
+.crt-screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 3px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* CRT flicker glow */
+.crt-screen::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,113,227,0.05) 0%, transparent 70%);
+  animation: flicker 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+/* Screen text — pixelated font */
+#screen-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  line-height: 1.5;
+  color: #4afc6f;
+  text-shadow: 0 0 4px rgba(74,252,111,0.6);
+  padding: 4px;
+  position: relative;
+  z-index: 3;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+  max-width: 95%;
+}
+@media (max-width: 768px) { #screen-text { font-size: 5px; } }
+
+/* Blinking cursor */
+#screen-text::after {
+  content: '_';
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Monitor base/stand */
+.crt-stand {
+  width: 50%;
+  height: 10px;
+  margin: 0 auto;
+  background: #c4c0b8;
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
+}
+.crt-base {
+  width: 70%;
+  height: 5px;
+  margin: 0 auto;
+  background: #b4b0a8;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Power LED */
+.led {
+  position: absolute;
+  bottom: 4px; right: 8px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #4afc6f;
+  box-shadow: 0 0 4px #4afc6f;
+  animation: led-pulse 3s ease-in-out infinite;
+}
+@keyframes led-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Floppy drive slot detail */
+.floppy-slot {
+  width: 40%;
+  height: 3px;
+  margin: 4px auto 0;
+  background: #888;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.3);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cloud-link::after, .crt-screen::after, .led { animation: none; }
+  #screen-text::after { animation: none; opacity: 0; }
+}

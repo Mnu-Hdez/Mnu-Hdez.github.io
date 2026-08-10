@@ -1,780 +1,487 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manuel Moreno — Network & Infrastructure Engineer</title>
-<meta name="description" content="Network & Infrastructure Engineer · Computer Engineering (UPM) · Homelab · VPN · Security · Open-source">
-<meta property="og:title" content="Manuel Moreno — Network & Infrastructure">
-<meta property="og:description" content="Computer Engineer specialized in network infrastructure, VPN, security and self-hosting.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://v3b.fal.media/files/b/0aa4f5ed/vnZe_HEoscgm7hWOanlqW_p44PeGz3.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manuel Moreno Hernandez - IT Infrastructure & Sysadmin</title>
+  <meta name="description" content="Estudiante de Ingeniería de Computadores (UPM) con infraestructura de producción real. Docker, Linux, redes, ciberseguridad y homelab con 15+ servicios en producción continua.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/retro-scene.css">
+  <style>
+/* ===== TOKENS ===== */
 :root {
-  /* === TECHNICAL MODE (DEFAULT - DARK) === */
-  --bg: #040404;
-  --bg-elevated: #0a0a0a;
-  --bg-card: #0d0d0d;
-  --fg: #fafafa;
-  --fg-muted: #888888;
-  --fg-subtle: #444444;
-  --accent: #00d4aa;
-  --accent-dim: rgba(0, 212, 170, 0.1);
-  --accent-glow: rgba(0, 212, 170, 0.35);
-  --border: #1a1a1a;
-  --border-hover: #2a2a2a;
-  --border-glass: rgba(255, 255, 255, 0.06);
-  --radius: 1.5rem;
-  --radius-sm: 0.75rem;
-  --radius-inner: calc(1.5rem - 0.375rem);
-  --max-width: 1200px;
-  --space: clamp(1rem, 2vw, 1.5rem);
-  --space-lg: clamp(2rem, 4vw, 3rem);
-  --space-xl: clamp(3rem, 6vw, 5rem);
-  --space-xxl: clamp(5rem, 10vw, 8rem);
-  --transition: 200ms ease;
-  --transition-spring: 700ms cubic-bezier(0.32, 0.72, 0, 1);
-  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
-  --header-h: 72px;
-  --mode: technical;
-}
-
-[data-mode="creative"] {
-  /* === CREATIVE MODE (LIGHT) === */
   --bg: #fafafa;
   --bg-elevated: #ffffff;
-  --bg-card: #f5f5f5;
-  --fg: #0a0a0a;
-  --fg-muted: #525252;
-  --fg-subtle: #a3a3a3;
-  --accent: #6366f1;
-  --accent-dim: rgba(99, 102, 241, 0.1);
-  --accent-glow: rgba(99, 102, 241, 0.25);
-  --border: #e5e5e5;
-  --border-hover: #d4d4d4;
-  --border-glass: rgba(0, 0, 0, 0.06);
-  --mode: creative;
+  --bg-subtle: #f5f5f7;
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --accent: #0071e3;
+  --accent-hover: #0077ED;
+  --accent-soft: rgba(0,113,227,0.08);
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.12);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --bg-elevated: #1c1c1e;
+    --bg-subtle: #1c1c1e;
+    --text: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #6e6e73;
+    --accent: #0a84ff;
+    --accent-hover: #409CFF;
+    --accent-soft: rgba(10,132,255,0.12);
+    --border: rgba(255,255,255,0.1);
+    --border-strong: rgba(255,255,255,0.15);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
   }
 }
 
+/* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; font-size: 16px; }
-
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font);
   background: var(--bg);
-  color: var(--fg);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: var(--text);
+  line-height: 1.5;
   overflow-x: hidden;
-  transition: background 500ms ease, color 500ms ease;
 }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(var(--accent-rgb), 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(var(--accent-rgb), 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
-  transition: opacity 500ms ease;
-}
+/* ===== LAYOUT ===== */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+@media (max-width: 768px) { .section { padding: 56px 0; } }
 
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--space);
-  padding: 0.5rem 1rem;
-  background: var(--accent);
-  color: var(--bg);
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  z-index: 10000;
-  transition: top var(--transition);
-}
-.skip-link:focus { top: var(--space); }
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space);
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: var(--header-h);
-  background: rgba(var(--bg-rgb), 0.8);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border-glass);
-  transition: background 300ms ease, border-color 300ms ease;
-}
-
-header.scrolled {
-  background: rgba(var(--bg-rgb), 0.95);
-  border-bottom-color: var(--border);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  gap: var(--space);
-}
-
-.brand {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: 0.05em;
-  transition: color var(--transition), transform var(--transition);
-}
-.brand:hover { color: var(--fg); transform: translateY(-1px); }
-
-.nav-links {
-  display: none;
-  list-style: none;
-  gap: clamp(1.25rem, 2.5vw, 2.5rem);
-}
-
-.nav-links a {
-  color: var(--fg-muted);
-  text-decoration: none;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  transition: color var(--transition), transform var(--transition);
-  position: relative;
-  padding-bottom: 4px;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1.5px;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width var(--transition-spring);
-}
-.nav-links a:hover { color: var(--fg); transform: translateY(-1px); }
-.nav-links a:hover::after { width: 100%; }
-
-@media (min-width: 768px) { .nav-links { display: flex; } }
-
-.mode-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--fg);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.mode-toggle:hover {
-  border-color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px var(--accent-glow);
-}
-.mode-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mode-toggle svg { width: 18px; height: 18px; transition: transform 300ms ease; }
-[data-mode="creative"] .mode-toggle .tech-icon { display: none; }
-:not([data-mode="creative"]) .mode-toggle .creative-icon { display: none; }
-
-.nav-cta {
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 999px;
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-.nav-cta:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 48px -8px var(--accent-glow); }
-@media (min-width: 768px) { .nav-cta { display: inline-flex; } }
-
-main { padding-top: var(--header-h); }
-
-section { padding: var(--space-xxl) 0; }
-
-.hero {
-  min-height: calc(100dvh - var(--header-h));
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(var(--accent-rgb), 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(var(--accent-rgb), 0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-xxl);
-  align-items: center;
-  width: 100%;
-}
-
-@media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 1.15fr 0.85fr; }
-}
-
-.hero-content { position: relative; z-index: 1; }
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--accent-dim);
-  border: 1px solid rgba(var(--accent-rgb), 0.25);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: var(--space-lg);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.badge::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 16px var(--accent-glow);
-  animation: pulse 3s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-h1 {
-  font-size: clamp(2.75rem, 6.5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.5rem;
-}
-h1 .accent { color: var(--accent); }
-
-.role {
-  font-family: var(--font-mono);
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  color: var(--fg-muted);
-  margin-bottom: var(--space);
-  display: flex; align-items: center; gap: 0.625rem;
-}
-.role::before {
-  content: ''; width: 4px; height: 4px; border-radius: 50%;
-  background: var(--accent); box-shadow: 0 0 12px var(--accent-glow);
-}
-
-.description {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  color: var(--fg-muted);
-  max-width: 55ch;
-  line-height: 1.75;
-  margin-bottom: var(--space-xxl);
-}
-
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.875rem; }
-
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
-  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600;
-  text-decoration: none; border-radius: 999px;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
-  border: 1px solid transparent; white-space: nowrap;
-}
-
-.btn-primary {
-  background: var(--accent); color: var(--bg); position: relative; overflow: hidden;
-}
-.btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%); opacity: 0; transition: opacity var(--transition); }
-.btn-primary:hover::before { opacity: 1; }
-.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 64px -12px var(--accent-glow); }
-.btn-primary:active { transform: translateY(-1px) scale(0.99); }
-
-.btn-outline { background: transparent; color: var(--fg); border-color: var(--border); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); transform: translateY(-2px); }
-
-.btn-ghost { background: transparent; color: var(--fg-muted); border-color: transparent; }
-.btn-ghost:hover { color: var(--fg); background: var(--accent-dim); }
-
-.hero-visual {
-  position: relative; aspect-ratio: 1 / 1;
-  border-radius: var(--radius); overflow: hidden;
-  background: var(--bg-elevated);
-  box-shadow: 0 0 0 1px var(--border-glass), 0 40px 80px -20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
-}
-[data-mode="creative"] .hero-visual { box-shadow: 0 0 0 1px var(--border-glass), 0 40px 80px -20px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.5); }
-.hero-visual::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.03) 0%, transparent 60%); pointer-events: none; }
-.hero-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms cubic-bezier(0.32, 0.72, 0, 1); }
-.hero-visual:hover img { transform: scale(1.03); }
-
-section h2 {
-  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
-  color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase;
-  margin-bottom: var(--space-xxl);
-  display: flex; align-items: center; gap: 1rem;
-}
-section h2::before { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-@media (max-width: 599px) { section h2::before { display: none; } }
-
-.section-grid {
-  display: grid; grid-template-columns: 1fr; gap: var(--space-lg);
-}
-@media (min-width: 768px) { .section-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .section-grid { grid-template-columns: repeat(3, 1fr); } }
-
-.card {
-  position: relative; background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-  transition: border-color var(--transition-spring), transform var(--transition-spring), box-shadow var(--transition-spring);
-}
-.card::before {
-  content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner);
-  border: 1px solid var(--border-glass); pointer-events: none; opacity: 0;
-  transition: opacity var(--transition);
-  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
-}
-[data-mode="creative"] .card::before { background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 50%); }
-.card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 32px 64px -16px rgba(0,0,0,0.4), 0 0 0 1px var(--accent); }
-[data-mode="creative"] .card:hover { box-shadow: 0 32px 64px -16px rgba(0,0,0,0.15), 0 0 0 1px var(--accent); }
-.card:hover::before { opacity: 1; }
-
-.card-inner { padding: var(--space-xl); }
-
-.card-header {
-  display: flex; flex-direction: column; gap: 0.625rem;
-  margin-bottom: var(--space-lg); padding-bottom: var(--space-lg);
+/* ===== NAV ===== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(250,250,250,0.72);
   border-bottom: 1px solid var(--border);
 }
-@media (min-width: 600px) { .card-header { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
-
-.card-title { font-size: 1.125rem; font-weight: 600; color: var(--fg); line-height: 1.3; }
-.card-subtitle { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted); line-height: 1.5; }
-.card-date {
-  font-family: var(--font-mono); font-size: 0.7rem; color: var(--fg-subtle);
-  white-space: nowrap; background: var(--bg); padding: 0.375rem 0.875rem;
-  border-radius: 999px; border: 1px solid var(--border); flex-shrink: 0;
+@media (prefers-color-scheme: dark) {
+  nav { background: rgba(0,0,0,0.72); }
 }
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 400; color: var(--text-secondary); transition: color var(--transition); }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-size: 13px; font-weight: 500; color: var(--accent);
+  padding: 6px 16px; border-radius: var(--radius-pill);
+  border: 1px solid var(--accent); transition: all var(--transition);
+}
+.nav-cta:hover { background: var(--accent); color: #fff; }
+@media (max-width: 768px) { .nav-links { display: none; } }
 
-.card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
-.card-bullets li { position: relative; padding-left: 1.5rem; font-size: 0.9375rem; color: var(--fg-muted); line-height: 1.65; transition: color var(--transition); }
-.card-bullets li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.6; transition: opacity var(--transition), transform var(--transition); }
-.card:hover .card-bullets li::before { opacity: 1; transform: scale(1.15); }
+/* ===== HERO ===== */
+.hero { padding: 120px 0 80px; text-align: center; }
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  margin-bottom: 20px;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--text-secondary); max-width: 560px; margin: 0 auto 36px;
+  line-height: 1.55;
+}
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  background: var(--accent); color: #fff; font-weight: 500; font-size: 15px;
+  transition: all var(--transition);
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: var(--radius-pill);
+  background: transparent; color: var(--accent); font-weight: 500; font-size: 15px;
+  border: 1px solid var(--border-strong); transition: all var(--transition);
+}
+.btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); }
 
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg); }
+/* ===== ABOUT ===== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+.about-text p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.65; margin-bottom: 16px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-card {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+  box-shadow: var(--shadow-sm);
+}
+.about-card h3 { font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+.about-card ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.about-card li { font-size: 15px; color: var(--text); display: flex; align-items: flex-start; gap: 10px; }
+.about-card li::before { content: ""; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; }
 
-.skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--transition-spring), transform var(--transition-spring); }
-.skill-card::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
-.skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-.skill-card:hover::before { opacity: 1; }
-.skill-inner { padding: var(--space-xl); }
+/* ===== BENTO: SKILLS ===== */
+.section-head { margin-bottom: 40px; }
+.section-head h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.section-head p { color: var(--text-secondary); font-size: 1.05rem; }
+.bento {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 768px) { .bento { grid-template-columns: 1fr; } }
+.bento-cell {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  box-shadow: var(--shadow-sm); transition: box-shadow var(--transition), transform var(--transition);
+}
+.bento-cell:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.bento-cell.wide { grid-column: span 2; }
+@media (max-width: 768px) { .bento-cell.wide { grid-column: span 1; } }
+.bento-cell h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+.bento-cell p { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+.bento-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag {
+  font-size: 12px; font-weight: 500; padding: 4px 10px;
+  border-radius: var(--radius-pill); background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+.tag.accent { background: var(--accent-soft); color: var(--accent); }
 
-.skill-category { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: var(--space-lg); display: flex; align-items: center; gap: 0.5rem; }
-.skill-category::before { content: ''; width: 4px; height: 14px; background: var(--accent); border-radius: 2px; }
+/* ===== TIMELINE ===== */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid; grid-template-columns: 160px 1fr; gap: 32px;
+  padding: 28px 0; border-bottom: 1px solid var(--border);
+}
+.timeline-item:last-child { border-bottom: none; }
+@media (max-width: 768px) { .timeline-item { grid-template-columns: 1fr; gap: 8px; } }
+.timeline-date { font-size: 13px; font-weight: 500; color: var(--text-tertiary); }
+.timeline-content h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+.timeline-content .org { font-size: 14px; color: var(--accent); margin-bottom: 10px; }
+.timeline-content ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.timeline-content li { font-size: 14px; color: var(--text-secondary); line-height: 1.55; padding-left: 16px; position: relative; }
+.timeline-content li::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--border-strong); }
 
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.375rem 0.875rem; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; color: var(--fg-muted); transition: border-color var(--transition), color var(--transition), background var(--transition), transform var(--transition); }
-.tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); transform: translateY(-1px); }
-.tag-primary { color: var(--accent); border-color: rgba(var(--accent-rgb), 0.25); }
-.tag-blue { color: #3b82f6; border-color: rgba(59,130,246,0.25); }
-.tag-green { color: #10b981; border-color: rgba(16,185,129,0.25); }
-.tag-purple { color: #a855f7; border-color: rgba(168,85,247,0.25); }
+/* ===== CERTIFICATIONS ===== */
+.cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 768px) { .cert-grid { grid-template-columns: 1fr; } }
+.cert-card {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 20px; text-align: center;
+  transition: box-shadow var(--transition);
+}
+.cert-card:hover { box-shadow: var(--shadow-md); }
+.cert-card .cert-icon { width: 40px; height: 40px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--accent-soft); }
+.cert-card .cert-icon svg { width: 20px; height: 20px; }
+.cert-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.cert-card p { font-size: 13px; color: var(--text-tertiary); }
 
-.projects-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); }
-@media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
+/* ===== CONTACT ===== */
+.contact { text-align: center; padding: 100px 0; }
+.contact h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+.contact p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-.project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color var(--transition-spring), transform var(--transition-spring); }
-.project-card::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
-.project-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
-.project-card:hover::before { opacity: 1; }
+/* ===== FOOTER ===== */
+footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+footer p { font-size: 13px; color: var(--text-tertiary); }
 
-.project-header { padding: var(--space-lg); border-bottom: 1px solid var(--border); background: var(--bg); }
-.project-name { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600; color: var(--fg); margin-bottom: 0.375rem; }
-.project-desc { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.55; }
-.project-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: var(--space-lg); margin-top: auto; }
-.project-lang { display: inline-flex; align-items: center; gap: 0.375rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--fg-subtle); }
-.project-lang::before { content: ''; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.project-stats { display: flex; gap: 1rem; margin-left: auto; font-family: var(--font-mono); font-size: 0.65rem; color: var(--fg-subtle); }
-.project-link { display: block; padding: var(--space-lg); text-align: center; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); text-decoration: none; background: var(--accent-dim); border-top: 1px solid var(--border); transition: color var(--transition), background var(--transition); }
-.project-link:hover { color: var(--fg); background: var(--bg); }
-
-.blog-teaser { text-align: center; padding: var(--space-xl); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
-.blog-teaser h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
-.blog-teaser p { color: var(--fg-muted); margin-bottom: var(--space-lg); }
-
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg); }
-
-.contact-item { display: flex; align-items: flex-start; gap: 1rem; padding: var(--space-xl); background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color var(--transition-spring), transform var(--transition-spring); position: relative; overflow: hidden; }
-.contact-item::before { content: ''; position: absolute; inset: 1.5px; border-radius: var(--radius-inner); border: 1px solid var(--border-glass); pointer-events: none; opacity: 0; transition: opacity var(--transition); }
-.contact-item:hover { border-color: var(--accent); transform: translateY(-4px); }
-.contact-item:hover::before { opacity: 1; }
-
-.contact-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--accent-dim); border-radius: var(--radius-sm); color: var(--accent); font-size: 1.25rem; flex-shrink: 0; transition: transform var(--transition-spring), background var(--transition); }
-.contact-item:hover .contact-icon { transform: scale(1.1) rotate(-3deg); background: var(--accent); color: var(--bg); }
-
-.contact-info { display: flex; flex-direction: column; gap: 0.25rem; }
-.contact-label { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--fg-subtle); letter-spacing: 0.08em; text-transform: uppercase; }
-.contact-value { font-size: 0.9375rem; color: var(--fg); font-weight: 500; }
-
-footer { padding: var(--space-xxl) 0; border-top: 1px solid var(--border); text-align: center; }
-.footer-text { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--fg-subtle); margin-bottom: 0.75rem; }
-.footer-status { font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-subtle); display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-.status-item { display: flex; align-items: center; gap: 0.5rem; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); animation: pulse 3s ease-in-out infinite; }
-
-.reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms cubic-bezier(0.32, 0.72, 0, 1), transform 800ms cubic-bezier(0.32, 0.72, 0, 1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
-.stagger-1 { transition-delay: 100ms; }
-.stagger-2 { transition-delay: 200ms; }
-.stagger-3 { transition-delay: 300ms; }
-.stagger-4 { transition-delay: 400ms; }
-.stagger-5 { transition-delay: 500ms; }
-.stagger-6 { transition-delay: 600ms; }
-</style>
+/* ===== ANIMATION ===== */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .fade-up.in { opacity: 1; transform: translateY(0); }
+}
+  </style>
 </head>
 <body>
-<a href="#main" class="skip-link">Saltar al contenido principal</a>
 
-<header>
-  <nav class="nav container">
-    <a href="#" class="brand" aria-label="Inicio">$ mmh --profile</a>
-    <ul class="nav-links" role="navigation" aria-label="Navegación principal">
-      <li><a href="#experience">Experiencia</a></li>
-      <li><a href="#education">Formación</a></li>
-      <li><a href="#skills">Stack</a></li>
-      <li><a href="#projects">Proyectos</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#contact">Contacto</a></li>
-    </ul>
-    <button class="mode-toggle" aria-label="Cambiar modo" id="mode-toggle">
-      <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/><polyline points="15 3 15 9 21 9"/></svg>
-      <svg class="creative-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <span id="mode-label">Técnico</span>
-    </button>
-    <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="nav-cta">GitHub</a>
-  </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Manuel Moreno</a>
+    <div class="nav-links">
+      <a href="#about">Sobre mí</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experiencia</a>
+      <a href="#education">Educación</a>
+      <a href="#certs">Certificaciones</a>
+    </div>
+    <a href="#contact" class="nav-cta">Contactar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <h1>Infraestructura real,<br><span class="accent">no práctica.</span></h1>
+    <p class="hero-sub">Estudiante de Ingeniería de Computadores (UPM) con un homelab de 15+ servicios en producción. Administración de sistemas, redes, ciberseguridad y Docker.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Contactar</a>
+      <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener" class="btn-secondary">LinkedIn</a>
+    </div>
+  </div>
 </header>
 
-<main id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <span class="badge" id="availability-badge">Disponible para oportunidades</span>
-          <h1 id="hero-title">Manuel Moreno <span class="accent">Hernández</span></h1>
-          <p class="role" id="role-text">// Computer Engineering · UPM · Madrid</p>
-          <p class="description" id="description-text">
-            Network & Infrastructure Engineer specialized in network infrastructure, perimeter security and open-source solutions. Currently interning at an international metallurgy company applying networking in industrial environments.
-          </p>
-          <div class="hero-actions">
-            <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="cta-github">Ver GitHub</a>
-            <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="cta-linkedin">LinkedIn</a>
-            <a href="#blog" class="btn btn-ghost" id="cta-blog">Blog</a>
-          </div>
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-head">
+          <h2>Sobre mí</h2>
+          <p>Desde 2023 mantengo una infraestructura de producción real.</p>
         </div>
-        <aside class="hero-visual" aria-hidden="true">
-          <img src="https://v3b.fal.media/files/b/0aa4f5ed/vnZe_HEoscgm7hWOanlqW_p44PeGz3.png" alt="Network infrastructure visualization" loading="eager" fetchpriority="high">
-        </aside>
+        <p>No como práctica, sino porque me apasiona entender cómo se sostienen los sistemas y qué hacer cuando algo falla.</p>
+        <p>Soy estudiante de Ingeniería de Computadores (UPM) y actualmente estoy en prácticas de IT en Industrias Duero, donde llevo auditorías de inventario hardware, ayudo con la planificación de infraestructura de red y mantengo la base de conocimientos del departamento.</p>
+        <p>En paralelo, diseño y administro mi propio homelab sobre TrueNAS con más de 15 servicios en producción continua.</p>
+      </div>
+      <div class="about-card fade-up">
+        <h3>Especialización</h3>
+        <ul>
+          <li>Administración de sistemas Linux y TrueNAS (ZFS)</li>
+          <li>Redes: TCP/IP, DNS, DHCP, VLANs, cableado estructurado</li>
+          <li>Ciberseguridad ofensiva: Kali Linux, VulnHub, CTFs (picoCTF-CMU)</li>
+          <li>Windows Server, Active Directory y LDAP (formación en curso)</li>
+          <li>Microsoft Azure (nivel básico)</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="experience" class="container reveal stagger-1" aria-labelledby="exp-title">
-    <h2 id="exp-title">Experiencia</h2>
-    <div class="section-grid">
-      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp1-title">Prácticas — Becario IT</h3><p class="card-subtitle" id="exp1-company">Industrias Duero · Metalurgia y estructuras viales/civiles</p></div><time class="card-date" datetime="2024">2024 — presente</time></header><ul class="card-bullets"><li id="exp1-1">Soporte y mantenimiento de infraestructura de red en entorno industrial internacional.</li><li id="exp1-2">Aplicación de soluciones de conectividad y seguridad en planta de producción metalúrgica.</li><li id="exp1-3">Coordinación con equipos multidisciplinares en proyectos de infraestructura civil.</li></ul></div></article>
-      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp2-title">Piscina 42 Madrid</h3><p class="card-subtitle" id="exp2-company">Programa de estudios Telefónica · 42 Madrid</p></div><time class="card-date" datetime="2023">2023</time></header><ul class="card-bullets"><li id="exp2-1">Formación intensiva en programación en C y resolución de problemas en entorno peer-to-peer.</li><li id="exp2-2">Proyectos colaborativos bajo metodología de aprendizaje autónomo.</li></ul></div></article>
-      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="exp3-title">Homelab — Infraestructura Doméstica</h3><p class="card-subtitle" id="exp3-company">Proyecto personal · TrueNAS + Redes</p></div><time class="card-date" datetime="2022">2022 — presente</time></header><ul class="card-bullets"><li id="exp3-1">Despliegue y administración de servidor NAS con TrueNAS para almacenamiento y servicios.</li><li id="exp3-2">Configuración de VPN (WireGuard / Tailscale) para acceso remoto seguro.</li><li id="exp3-3">Filtrado de DNS y bloqueo de publicidad con AdGuard Home a nivel de red.</li><li id="exp3-4">Gestión de routers y configuración avanzada de redes locales y VLANs.</li><li id="exp3-5">Despliegue de aplicaciones open-source orientadas a red y autoalojamiento.</li></ul></div></article>
+<!-- SKILLS BENTO -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Homelab en producción</h2>
+      <p>15+ servicios corriendo 24/7 sobre TrueNAS</p>
     </div>
-  </section>
-
-  <section id="education" class="container reveal stagger-2" aria-labelledby="edu-title">
-    <h2 id="edu-title">Formación</h2>
-    <div class="section-grid">
-      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="edu1-title">Grado en Ingeniería de Computadores</h3><p class="card-subtitle" id="edu1-school">Universidad Politécnica de Madrid</p></div><time class="card-date" datetime="2020">2020 — en curso</time></header><p id="edu1-desc">Especialización en redes, sistemas y arquitecturas de computadores.</p></div></article>
-      <article class="card"><div class="card-inner"><header class="card-header"><div><h3 class="card-title" id="edu2-title">Bachillerato Científico</h3><p class="card-subtitle" id="edu2-school">I.E.S. Campiña Alta</p></div><time class="card-date" datetime="2018-2020">2018 — 2020</time></header></div></article>
+    <div class="bento">
+      <div class="bento-cell wide fade-up">
+        <h3>Docker & Orquestación</h3>
+        <p>Gestión de contenedores, Nginx reverse proxy y SSL automatizado. Todo desplegado sobre TrueNAS con ZFS.</p>
+        <div class="bento-tags">
+          <span class="tag accent">Docker</span>
+          <span class="tag accent">Nginx</span>
+          <span class="tag">SSL</span>
+          <span class="tag">TrueNAS</span>
+          <span class="tag">ZFS</span>
+        </div>
+      </div>
+      <div class="bento-cell fade-up">
+        <h3>VPN & Acceso Remoto</h3>
+        <p>WireGuard y Tailscale para acceso remoto seguro a la infraestructura.</p>
+        <div class="bento-tags">
+          <span class="tag accent">WireGuard</span>
+          <span class="tag accent">Tailscale</span>
+        </div>
+      </div>
+      <div class="bento-cell fade-up">
+        <h3>DNS & Monitorización</h3>
+        <p>DNS local con AdGuard, monitorización con Netdata y Uptime Kuma.</p>
+        <div class="bento-tags">
+          <span class="tag">AdGuard</span>
+          <span class="tag">Netdata</span>
+          <span class="tag">Uptime Kuma</span>
+        </div>
+      </div>
+      <div class="bento-cell wide fade-up">
+        <h3>Backup & Recuperación</h3>
+        <p>Rutinas de backup y procedimientos de recuperación documentados. La integridad de los datos no se improvisa.</p>
+        <div class="bento-tags">
+          <span class="tag">Backup</span>
+          <span class="tag">Disaster Recovery</span>
+          <span class="tag">Documentación</span>
+        </div>
+      </div>
+      <div class="bento-cell fade-up" style="background: var(--accent-soft); border-color: var(--accent);">
+        <h3 style="color: var(--accent);">AI Engineering</h3>
+        <p>Claude Agent SDK, subagentes de código Claude, automatización con IA.</p>
+        <div class="bento-tags">
+          <span class="tag accent">Claude SDK</span>
+          <span class="tag">Subagentes</span>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="skills" class="container reveal stagger-3" aria-labelledby="skills-title">
-    <h2 id="skills-title">Stack técnico</h2>
-    <div class="skills-grid">
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill1-cat">Redes</p><div class="skill-tags"><span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag">VLANs</span><span class="tag">Routing</span><span class="tag">Firewalls</span><span class="tag">NAT</span></div></div></article>
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill2-cat">VPN & Tunelado</p><div class="skill-tags"><span class="tag tag-blue">WireGuard</span><span class="tag tag-blue">Tailscale</span><span class="tag tag-blue">Site-to-Site</span><span class="tag tag-blue">SSH Tunnels</span></div></div></article>
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill3-cat">Seguridad</p><div class="skill-tags"><span class="tag tag-green">AdGuard Home</span><span class="tag tag-green">DNS Filtering</span><span class="tag tag-green">Hardening</span><span class="tag tag-green">Cybersecurity</span></div></div></article>
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill4-cat">Sistemas & Servidores</p><div class="skill-tags"><span class="tag">TrueNAS</span><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Self-Hosting</span><span class="tag">Open-Source</span></div></div></article>
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill5-cat">Hardware & Homelab</p><div class="skill-tags"><span class="tag tag-blue">Routers</span><span class="tag tag-blue">Switches</span><span class="tag tag-blue">NAS</span><span class="tag tag-blue">Mini-PC</span><span class="tag tag-blue">Cabling</span></div></div></article>
-      <article class="skill-card"><div class="skill-inner"><p class="skill-category" id="skill6-cat">Lenguajes</p><div class="skill-tags"><span class="tag tag-green">Python</span><span class="tag tag-green">Ada</span><span class="tag tag-green">Bash</span><span class="tag tag-green">C</span><span class="tag tag-green">JavaScript</span></div></div></article>
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Experiencia</h2>
+      <p>Trabajo técnico real en entorno de producción.</p>
     </div>
-  </section>
-
-  <section id="projects" class="container reveal stagger-4" aria-labelledby="projects-title">
-    <h2 id="projects-title">Proyectos destacados</h2>
-    <div class="projects-grid" id="projects-grid"><!-- Populated by JS --></div>
-    <div style="text-align:center; margin-top: var(--space-xxl);">
-      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="view-all-repos">Ver todos en GitHub</a>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-date">Abr 2026 - Presente (5 meses)</div>
+        <div class="timeline-content">
+          <h3>Becario de TI</h3>
+          <div class="org">Industrias Duero - Madrid</div>
+          <ul>
+            <li>Realizo auditorías periódicas de la infraestructura de red: verificación de dispositivos conectados, revisión de accesos y comprobación de políticas de seguridad en entorno de producción real.</li>
+            <li>Diagnostico y resuelvo incidencias de hardware y software, escuchando a cada persona para identificar el problema real detrás de su petición y explicando la solución con claridad, sin jerga técnica innecesaria.</li>
+            <li>Audité el inventario físico de hardware completo de la empresa y lo contrasté con el registro digital, detectando y corrigiendo discrepancias en activos de red y equipos de usuario mediante el uso de herramientas propias.</li>
+            <li>Gestiono tickets e incidencias del equipo mediante herramientas de HelpDesk y participo en el roadmap semanal de proyectos IT mediante Trello.</li>
+            <li>Consolidé la base de conocimientos del departamento: documenté configuraciones de red, procedimientos habituales y soluciones a incidencias recurrentes para que cualquier miembro del equipo pueda consultarlas.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jul 2023 - Ago 2023 (2 meses)</div>
+        <div class="timeline-content">
+          <h3>Programa de selección intensivo</h3>
+          <div class="org">42 Madrid (Fundación Telefónica) - Madrid</div>
+          <ul>
+            <li>Superé el proceso de selección intensivo: 26 días consecutivos de inmersión total en programación, sin profesores ni clases, basado en aprendizaje colaborativo y resolución de proyectos bajo presión.</li>
+            <li>Desarrollé proyectos de sistemas y lógica de programación en C en un entorno de alta exigencia y ritmo sostenido.</li>
+            <li>Aprendí a buscar soluciones de forma autónoma y colaborativa cuando no hay nadie que te dé la respuesta: leer documentación, probar, fallar y probar de nuevo.</li>
+            <li>Trabajé bajo presión real durante casi un mes, lo que desarrolló resiliencia y capacidad para priorizar cuando todo parece urgente a la vez.</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="blog" class="container reveal stagger-5" aria-labelledby="blog-title">
-    <h2 id="blog-title">Blog & Escritos</h2>
-    <div class="blog-teaser">
-      <h3 id="blog-teaser-title">Próximamente en GitHub Pages</h3>
-      <p id="blog-teaser-desc">Artículos técnicos sobre networking, homelab, seguridad y open-source. En construcción...</p>
-      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="blog-cta">Seguir en GitHub</a>
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Educación</h2>
     </div>
-  </section>
-
-  <section id="contact" class="container reveal stagger-6" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contacto</h2>
-    <div class="contact-grid">
-      <a href="mailto:manuehernandez@protonmail.com" class="contact-item"><span class="contact-icon" aria-hidden="true">✉</span><div class="contact-info"><span class="contact-label" id="contact1-label">Email</span><span class="contact-value">manuehernandez@protonmail.com</span></div></a>
-      <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener noreferrer" class="contact-item"><span class="contact-icon" aria-hidden="true">in</span><div class="contact-info"><span class="contact-label" id="contact2-label">LinkedIn</span><span class="contact-value">manu-hdez</span></div></a>
-      <a href="https://github.com/Mnu-Hdez" target="_blank" rel="noopener noreferrer" class="contact-item"><span class="contact-icon" aria-hidden="true">GH</span><div class="contact-info"><span class="contact-label" id="contact3-label">GitHub</span><span class="contact-value">Mnu-Hdez</span></div></a>
-      <div class="contact-item"><span class="contact-icon" aria-hidden="true">📍</span><div class="contact-info"><span class="contact-label" id="contact4-label">Ubicación</span><span class="contact-value" id="contact4-value">Guadalajara, España</span></div></div>
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-date">2020 - 2026</div>
+        <div class="timeline-content">
+          <h3>Ingeniería de Computadores</h3>
+          <div class="org">Universidad Politécnica de Madrid (UPM)</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2017 - Jul 2020</div>
+        <div class="timeline-content">
+          <h3>Bachillerato Científico</h3>
+          <div class="org">IES Campiña Alta</div>
+        </div>
+      </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
+<!-- CERTIFICATIONS -->
+<section class="section" id="certs">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Certificaciones</h2>
+    </div>
+    <div class="cert-grid fade-up">
+      <div class="cert-card">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Claude Code in Action</h3>
+        <p>Anthropic</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Introduction to Intra/Social Entrepreneurship</h3>
+        <p>42 Madrid</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Certificado IA Generativa</h3>
+        <p>Santander</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head fade-up">
+      <h2>Idiomas</h2>
+    </div>
+    <div class="cert-grid fade-up">
+      <div class="cert-card"><h3>Español</h3><p>Nativo o bilingüe</p></div>
+      <div class="cert-card"><h3>Inglés</h3><p>Profesional funcional</p></div>
+      <div class="cert-card"><h3>Portugués</h3><p>Elemental</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="fade-up">¿Hablamos?</h2>
+    <p class="fade-up">Disponible para prácticas, proyectos de infraestructura y colaboraciones en sysadmin y ciberseguridad.</p>
+    <div class="contact-links fade-up">
+      <a href="mailto:cuentashdez@protonmail.com" class="btn-primary">Enviar email</a>
+      <a href="https://www.linkedin.com/in/manu-hdez" target="_blank" rel="noopener" class="btn-secondary">LinkedIn</a>
+      <a href="https://mnu-hdez.github.io/es/" target="_blank" rel="noopener" class="btn-secondary">Sitio personal</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <p class="footer-text" id="footer-copyright">Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES</p>
-    <div class="footer-status">
-      <span class="status-item"><span class="status-dot" aria-hidden="true"></span><span id="uptime-text">uptime: —</span></span>
-      <span class="status-item"><span class="status-dot" aria-hidden="true"></span><span id="status-text">status: OK</span></span>
-    </div>
+    <p>Manuel Moreno Hernandez - Guadalajara, Castilla-La Mancha, España</p>
   </div>
 </footer>
 
+<!-- RETRO COMPUTER SCENE -->
+<div class="scene-wrap" aria-hidden="true">
+  <div class="cloud"></div>
+  <div class="cloud-link"></div>
+  <div class="puter">
+    <div class="crt">
+      <div class="crt-screen">
+        <span id="screen-text"></span>
+      </div>
+      <div class="led"></div>
+    </div>
+    <div class="floppy-slot"></div>
+    <div class="crt-stand"></div>
+    <div class="crt-base"></div>
+  </div>
+  <div class="grass"></div>
+</div>
+
 <script>
-// === i18n Dictionary ===
-const I18N = {
-  es: {
-    'availability-badge': 'Disponible para oportunidades',
-    'hero-title': 'Manuel Moreno <span class="accent">Hernández</span>',
-    'role-text': '// Ingeniería de Computadores · UPM · Madrid',
-    'description-text': 'Ingeniero de Computadores especializado en infraestructura de redes, ciberseguridad y soluciones open-source. Actualmente en prácticas en Industrias Duero aplicando networking en entornos industriales.',
-    'cta-github': 'Ver GitHub', 'cta-linkedin': 'LinkedIn', 'cta-blog': 'Blog',
-    'exp-title': 'Experiencia',
-    'exp1-title': 'Prácticas — Becario IT',
-    'exp1-company': 'Industrias Duero · Metalurgia y estructuras viales/civiles',
-    'exp1-1': 'Soporte y mantenimiento de infraestructura de red en entorno industrial internacional.',
-    'exp1-2': 'Aplicación de soluciones de conectividad y seguridad en planta de producción metalúrgica.',
-    'exp1-3': 'Coordinación con equipos multidisciplinares en proyectos de infraestructura civil.',
-    'exp2-title': 'Piscina 42 Madrid',
-    'exp2-company': 'Programa de estudios Telefónica · 42 Madrid',
-    'exp2-1': 'Formación intensiva en programación en C y resolución de problemas en entorno peer-to-peer.',
-    'exp2-2': 'Proyectos colaborativos bajo metodología de aprendizaje autónomo.',
-    'exp3-title': 'Homelab — Infraestructura Doméstica',
-    'exp3-company': 'Proyecto personal · TrueNAS + Redes',
-    'exp3-1': 'Despliegue y administración de servidor NAS con TrueNAS para almacenamiento y servicios.',
-    'exp3-2': 'Configuración de VPN (WireGuard / Tailscale) para acceso remoto seguro.',
-    'exp3-3': 'Filtrado de DNS y bloqueo de publicidad con AdGuard Home a nivel de red.',
-    'exp3-4': 'Gestión de routers y configuración avanzada de redes locales y VLANs.',
-    'exp3-5': 'Despliegue de aplicaciones open-source orientadas a red y autoalojamiento.',
-    'edu-title': 'Formación',
-    'edu1-title': 'Grado en Ingeniería de Computadores',
-    'edu1-school': 'Universidad Politécnica de Madrid',
-    'edu1-desc': 'Especialización en redes, sistemas y arquitecturas de computadores.',
-    'edu2-title': 'Bachillerato Científico',
-    'edu2-school': 'I.E.S. Campiña Alta',
-    'skills-title': 'Stack técnico',
-    'skill1-cat': 'Redes', 'skill2-cat': 'VPN & Tunelado', 'skill3-cat': 'Seguridad',
-    'skill4-cat': 'Sistemas & Servidores', 'skill5-cat': 'Hardware & Homelab', 'skill6-cat': 'Lenguajes',
-    'projects-title': 'Proyectos destacados', 'view-all-repos': 'Ver todos en GitHub',
-    'blog-title': 'Blog y Escritos', 'blog-teaser-title': 'Próximamente en GitHub Pages',
-    'blog-teaser-desc': 'Artículos técnicos sobre networking, homelab, seguridad y open-source. En construcción...',
-    'blog-cta': 'Seguir en GitHub',
-    'contact-title': 'Contacto',
-    'contact1-label': 'Email', 'contact2-label': 'LinkedIn', 'contact3-label': 'GitHub', 'contact4-label': 'Ubicación',
-    'contact4-value': 'Guadalajara, España',
-    'footer-copyright': 'Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES',
-    'uptime-text': 'uptime: —', 'status-text': 'status: OK', 'no-desc': 'Sin descripción.', 'view-repo': 'Ver repositorio'
-  },
-  en: {
-    'availability-badge': 'Open to opportunities',
-    'hero-title': 'Manuel Moreno <span class="accent">Hernández</span>',
-    'role-text': '// Computer Engineering · UPM · Madrid',
-    'description-text': 'Computer Engineering student specialized in network infrastructure, perimeter security and open-source solutions. Currently interning at an international metallurgy company applying networking in industrial environments.',
-    'cta-github': 'View GitHub', 'cta-linkedin': 'LinkedIn', 'cta-blog': 'Blog',
-    'exp-title': 'Experience',
-    'exp1-title': 'Internship — IT Trainee',
-    'exp1-company': 'Industrias Duero · Metallurgy & road/civil structures',
-    'exp1-1': 'Support and maintenance of network infrastructure in an international industrial environment.',
-    'exp1-2': 'Deployment of connectivity and security solutions on a metallurgical production plant.',
-    'exp1-3': 'Coordination with multidisciplinary teams on civil infrastructure projects.',
-    'exp2-title': 'Pool 42 Madrid',
-    'exp2-company': 'Telefónica study program · 42 Madrid',
-    'exp2-1': 'Intensive C programming and problem-solving training in a peer-to-peer environment.',
-    'exp2-2': 'Collaborative projects under self-directed learning methodology.',
-    'exp3-title': 'Homelab — Home Infrastructure',
-    'exp3-company': 'Personal project · TrueNAS + Networking',
-    'exp3-1': 'Deployment and administration of a NAS server with TrueNAS for storage and services.',
-    'exp3-2': 'VPN configuration (WireGuard / Tailscale) for secure remote access.',
-    'exp3-3': 'Network-level DNS filtering and ad blocking with AdGuard Home.',
-    'exp3-4': 'Router management and advanced configuration of LANs and VLANs.',
-    'exp3-5': 'Deployment of open-source self-hosted networking applications.',
-    'edu-title': 'Education',
-    'edu1-title': 'BSc in Computer Engineering',
-    'edu1-school': 'Universidad Politécnica de Madrid',
-    'edu1-desc': 'Specialization in networking, systems and computer architectures.',
-    'edu2-title': 'Scientific Baccalaureate',
-    'edu2-school': 'I.E.S. Campiña Alta',
-    'skills-title': 'Tech Stack',
-    'skill1-cat': 'Networking', 'skill2-cat': 'VPN & Tunneling', 'skill3-cat': 'Security',
-    'skill4-cat': 'Systems & Servers', 'skill5-cat': 'Hardware & Homelab', 'skill6-cat': 'Languages',
-    'projects-title': 'Featured Projects', 'view-all-repos': 'See all on GitHub',
-    'blog-title': 'Blog & Writing', 'blog-teaser-title': 'Coming soon on GitHub Pages',
-    'blog-teaser-desc': 'Technical articles on networking, homelab, security and open-source. Under construction...',
-    'blog-cta': 'Follow on GitHub',
-    'contact-title': 'Contact',
-    'contact1-label': 'Email', 'contact2-label': 'LinkedIn', 'contact3-label': 'GitHub', 'contact4-label': 'Location',
-    'contact4-value': 'Guadalajara, Spain',
-    'footer-copyright': 'Manuel Moreno Hernández · Network & Infrastructure · 2025 · Guadalajara, ES',
-    'uptime-text': 'uptime: —', 'status-text': 'status: OK', 'no-desc': 'No description.', 'view-repo': 'View repository'
-  }
-};
-
-// === Theme State ===
-const THEMES = {
-  technical: { '--accent-rgb': '0, 212, 170', '--bg-rgb': '4, 4, 4' },
-  creative: { '--accent-rgb': '99, 102, 241', '--bg-rgb': '250, 250, 250' }
-};
-
-let currentMode = 'technical';
-
-function setMode(mode) {
-  currentMode = mode;
-  document.documentElement.setAttribute('data-mode', mode);
-  document.getElementById('mode-label').textContent = mode === 'technical' ? 'Técnico' : 'Creativo';
-  const vars = THEMES[mode];
-  Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
-  localStorage.setItem('mode', mode);
-}
-
-function toggleMode() {
-  setMode(currentMode === 'technical' ? 'creative' : 'technical');
-}
-
-// === Language Detection ===
-function detectLanguage() {
-  try { const stored = localStorage.getItem('lang'); if (stored && I18N[stored]) return stored; } catch (e) {}
-  const langs = navigator.languages || [navigator.language || 'en'];
-  for (const lang of langs) { const prefix = lang.toLowerCase().split('-')[0]; if (I18N[prefix]) return prefix; }
-  return 'en';
-}
-
-function applyLanguage(lang) {
-  const dict = I18N[lang]; if (!dict) return;
-  document.documentElement.lang = lang;
-  Object.entries(dict).forEach(([id, html]) => { const el = document.getElementById(id); if (el) el.innerHTML = html; });
-  try { localStorage.setItem('lang', lang); } catch (e) {}
-}
-
-// === GitHub Repos ===
-async function loadRepos() {
-  const grid = document.getElementById('projects-grid'); if (!grid) return;
-  const langColors = { Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6', Shell: '#89e051', C: '#555', 'C++': '#f34b7d', HTML: '#e34c26', CSS: '#563d7c', Go: '#00ADD8', Rust: '#dea584' };
-  const currentLang = detectLanguage();
-  try {
-    const res = await fetch('https://api.github.com/users/Mnu-Hdez/repos?sort=updated&per_page=100');
-    if (!res.ok) throw new Error('GitHub API: ' + res.status);
-    const data = await res.json();
-    const repos = data.filter(r => !r.fork).sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 4);
-    if (!repos.length) { grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">' + I18N[currentLang]['no-desc'] + '</p>'; return; }
-    grid.innerHTML = repos.map((r, i) => {
-      const color = langColors[r.language] || 'var(--accent)';
-      const desc = r.description ? escapeHtml(r.description) : I18N[currentLang]['no-desc'];
-      return `<article class="project-card reveal stagger-${(i%4)+1}"><header class="project-header"><h3 class="project-name">${escapeHtml(r.name)}</h3><p class="project-desc">${desc}</p></header><div class="project-meta">${r.language ? '<span class="project-lang" style="--lang-color:'+color+'"><span style="background:var(--lang-color)"></span>'+escapeHtml(r.language)+'</span>' : ''}<div class="project-stats"><span>★ '+r.stargazers_count+'</span><span>⑂ '+r.forks_count+'</span></div></div><a href="'+r.html_url+'" target="_blank" rel="noopener noreferrer" class="project-link">'+I18N[currentLang]['view-repo']+'</a></article>';
-    }).join('');
-    initScrollReveal(); // re-init for new cards
-  } catch (err) { grid.innerHTML = '<p style="text-align:center;color:var(--fg-muted); grid-column: 1/-1;">Could not load repositories.</p>'; }
-}
-
-function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''})[c]); }
-
-// === Scroll Reveal ===
-function initScrollReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-// === Header Scroll ===
-function initHeaderScroll() {
-  const header = document.querySelector('header'); let lastY = 0;
-  window.addEventListener('scroll', () => { const y = window.scrollY; header.classList.toggle('scrolled', y > 20); lastY = y; }, { passive: true });
-}
-
-// === Uptime ===
-function initUptime() {
-  const start = new Date('2022-01-01T00:00:00Z');
-  const fmt = (ms) => { const s = Math.floor(ms/1000), d = Math.floor(s/86400), h = Math.floor((s%86400)/3600), m = Math.floor((s%3600)/60); return d+'d '+h+'h '+m+'m'; };
-  const update = () => { const txt = fmt(Date.now()-start.getTime()); const el = document.getElementById('uptime-text'); if (el) el.textContent = 'uptime: '+txt; };
-  update(); setInterval(update, 60000);
-}
-
-// === Init ===
-document.addEventListener('DOMContentLoaded', () => {
-  // Restore mode
-  const savedMode = localStorage.getItem('mode');
-  if (savedMode && THEMES[savedMode]) setMode(savedMode);
-  else setMode('technical');
-
-  document.getElementById('mode-toggle').addEventListener('click', toggleMode);
-  applyLanguage(detectLanguage());
-  loadRepos();
-  initScrollReveal();
-  initHeaderScroll();
-  initUptime();
-});
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+<script src="js/retro-scene.js"></script>
 </body>
 </html>
