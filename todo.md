@@ -8,7 +8,13 @@
 
 ## Diagnóstico de publicación
 
-- [ ] Comparar la configuración de desarrollo con la compilación publicada.
-- [ ] Comprobar rutas de activos, HTML generado y compatibilidad del workflow.
-- [ ] Corregir la causa del despliegue que no reproduce la landing.
-- [ ] Verificar una publicación estática equivalente a GitHub Pages.
+- [x] Comparar la configuración de desarrollo con la compilación publicada.
+- [x] Comprobar rutas de activos, HTML generado y compatibilidad del workflow.
+- [x] Corregir la causa del despliegue que no reproduce la landing.
+- [x] Verificar una publicación estática equivalente a GitHub Pages.
+
+## Recuperación guiada del 404
+
+- [x] Verificar la configuración de Pages y la URL de publicación activa.
+- [x] Preparar una lista mínima y exacta de archivos fuente para el workflow.
+- [x] Preparar una alternativa sin compilación basada en archivos estáticos ya generados.
